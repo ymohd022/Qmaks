@@ -1,0 +1,149 @@
+<header [ngClass]="{'scrolled': isScrolled}">
+    <div class="navbar-container">
+      <!-- Logo and Brand -->
+      <div class="brand">
+        <a [routerLink]="['/']">
+          <img src="QMAKS-logo.png" alt="Company Logo" class="logo" />
+        </a>
+      </div>
+  
+      <!-- Desktop Navigation -->
+      <nav class="desktop-nav" [@fadeInOut]>
+        <ul>
+          <li>
+            <a [routerLink]="['/home']" 
+               routerLinkActive="active-link" 
+               [routerLinkActiveOptions]="{exact: true}" 
+               class="nav-link">
+              Home
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/about']" 
+               routerLinkActive="active-link" 
+               class="nav-link">
+              About Us
+            </a>
+          </li>
+          <li class="projects-dropdown">
+            <a (click)="toggleProjectsMenu()" 
+               [ngClass]="{'active-link': isRouteActive('/projects')}"
+               class="nav-link with-dropdown">
+              Projects <i class="bi" [ngClass]="isProjectsMenuOpen ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+            </a>
+            <div class="mega-menu" [@expandCollapse]="isProjectsMenuOpen ? 'expanded' : 'collapsed'" *ngIf="isProjectsMenuOpen">
+              <div class="mega-menu-container">
+                <div class="mega-menu-column">
+                  <h3>On-Going Projects</h3>
+                  <div class="project-card" *ngFor="let i of [1, 2, 3]">
+                    <img src="assets/ongoing-project-{{i}}.jpg" alt="Project {{i}}" />
+                    <div class="project-info">
+                      <h4>Project Title {{i}}</h4>
+                      <p>Brief description of the ongoing project {{i}}.</p>
+                      <a [routerLink]="['/projects/ongoing', i]" class="project-link">View Details</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="mega-menu-column">
+                  <h3>Completed Projects</h3>
+                  <div class="project-card" *ngFor="let i of [1, 2, 3]">
+                    <img src="assets/completed-project-{{i}}.jpg" alt="Project {{i}}" />
+                    <div class="project-info">
+                      <h4>Project Title {{i}}</h4>
+                      <p>Brief description of the completed project {{i}}.</p>
+                      <a [routerLink]="['/projects/completed', i]" class="project-link">View Details</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a [routerLink]="['/gallery']" 
+               routerLinkActive="active-link" 
+               class="nav-link">
+              Gallery
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/contact']" 
+               routerLinkActive="active-link" 
+               class="nav-link">
+              Contact
+            </a>
+          </li>
+        </ul>
+      </nav>
+  
+      <!-- CTA Button -->
+      <div class="cta-button" [@slideInOut]>
+        <button class="btn btn-primary">Book a Consultation</button>
+      </div>
+  
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+        <i class="bi" [ngClass]="isMobileMenuOpen ? 'bi-x-lg' : 'bi-list'"></i>
+      </button>
+    </div>
+  
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" [@expandCollapse]="isMobileMenuOpen ? 'expanded' : 'collapsed'" *ngIf="isMobileMenuOpen">
+      <ul>
+        <li>
+          <a [routerLink]="['/']" 
+             routerLinkActive="active-link" 
+             [routerLinkActiveOptions]="{exact: true}" 
+             class="nav-link">
+            Home
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/about']" 
+             routerLinkActive="active-link" 
+             class="nav-link">
+            About Us
+          </a>
+        </li>
+        <li>
+          <a (click)="toggleProjectsMenu()" 
+             [ngClass]="{'active-link': isRouteActive('/projects')}"
+             class="nav-link with-dropdown">
+            Projects <i class="bi" [ngClass]="isProjectsMenuOpen ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+          </a>
+          <div class="mobile-submenu" [@expandCollapse]="isProjectsMenuOpen ? 'expanded' : 'collapsed'" *ngIf="isProjectsMenuOpen">
+            <h3>On-Going Projects</h3>
+            <ul>
+              <li *ngFor="let i of [1, 2, 3]">
+                <a [routerLink]="['/projects/ongoing', i]" routerLinkActive="active-link">Project Title {{i}}</a>
+              </li>
+            </ul>
+            <h3>Completed Projects</h3>
+            <ul>
+              <li *ngFor="let i of [1, 2, 3]">
+                <a [routerLink]="['/projects/completed', i]" routerLinkActive="active-link">Project Title {{i}}</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a [routerLink]="['/gallery']" 
+             routerLinkActive="active-link" 
+             class="nav-link">
+            Gallery
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/contact']" 
+             routerLinkActive="active-link" 
+             class="nav-link">
+            Contact
+          </a>
+        </li>
+        <li class="mobile-cta">
+          <button class="btn btn-primary">Book a Consultation</button>
+        </li>
+      </ul>
+    </div>
+  </header>
+  
+  

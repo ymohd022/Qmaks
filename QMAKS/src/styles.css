@@ -1,0 +1,100 @@
+/* You can add global styles to this file, and also import other style files */
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+
+
+
+:root {
+  /* Primary Colors */
+  --royal-blue: #002f6c;
+  --gold: #d4af37;
+  --white: #ffffff;
+
+  /* Secondary Colors */
+  --light-gray: #f8f9fa;
+  --dark-gray: #333333;
+
+  /* Complementary Colors */
+  --teal: #008080;
+  --soft-beige: #f4e1c1;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+  color: var(--dark-gray);
+  background-color: var(--white);
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.rounded {
+  border-radius: 8px;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+/* Custom Material Overrides */
+.mat-mdc-raised-button.mat-primary {
+  background-color: var(--royal-blue);
+}
+
+.mat-mdc-raised-button.mat-accent {
+  background-color: var(--gold);
+  color: white;
+}
+
+.mat-mdc-stroked-button.mat-accent {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+/* Success and Error Snackbars */
+.success-snackbar {
+  background-color: #4caf50;
+  color: white;
+}
+
+.error-snackbar {
+  background-color: #f44336;
+  color: white;
+}
+
+/* For demo purposes - create placeholder images */
+img[src^="assets/images/"] {
+  background-color: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 0.7rem;
+}

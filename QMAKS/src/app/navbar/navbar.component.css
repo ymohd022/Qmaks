@@ -1,0 +1,290 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: all 0.3s ease;
+  }
+  
+  header.scrolled {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transform: translateY(0);
+  }
+  
+  .navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  /* Brand and Logo */
+  .brand {
+    display: flex;
+    align-items: center;
+  }
+  
+  .brand a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #002f6c; 
+  }
+  
+  .logo {
+    height: 60px;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+    /* background-color: #002f6c; */
+    /* border-radius: 50%; */
+    padding: 5px;
+  }
+  
+  .brand-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #002f6c; /* Royal Blue */
+  }
+  
+  .brand:hover .logo {
+    transform: scale(1.05);
+  }
+  
+  /* Desktop Navigation */
+  .desktop-nav {
+    display: flex;
+  }
+  
+  .desktop-nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .desktop-nav li {
+    position: relative;
+    margin: 0 0.5rem;
+  }
+  
+  .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    color: #333333; /* Dark Gray */
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+  }
+  
+  .nav-link:hover {
+    color: #d4af37; /* Gold */
+    border-bottom: 2px solid #d4af37; /* Gold */
+  }
+  
+  .active-link {
+    color: #002f6c !important; /* Royal Blue */
+    border-bottom: 2px solid #002f6c !important; /* Royal Blue */
+    font-weight: 600;
+  }
+  
+  .with-dropdown {
+    cursor: pointer;
+  }
+  
+  /* Mega Menu */
+  .mega-menu {
+    position: absolute;
+    top: 100%;
+    left: -200px;
+    width: 800px;
+    background-color: #fff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    z-index: 1001;
+    padding: 1.5rem;
+    border-top: 3px solid #d4af37; /* Gold */
+  }
+  
+  .mega-menu-container {
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .mega-menu-column {
+    flex: 1;
+  }
+  
+  .mega-menu-column h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #002f6c; /* Royal Blue */
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-bottom: 2px solid #d4af37; /* Gold */
+    padding-bottom: 0.5rem;
+  }
+  
+  .project-card {
+    display: flex;
+    margin-bottom: 1rem;
+    background-color: #f5f5f5; /* Light Gray */
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .project-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: #f4e1c1; /* Soft Beige */
+  }
+  
+  .project-card img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+  }
+  
+  .project-info {
+    padding: 0.5rem;
+  }
+  
+  .project-info h4 {
+    margin: 0 0 0.25rem;
+    font-size: 0.9rem;
+    color: #002f6c; /* Royal Blue */
+  }
+  
+  .project-info p {
+    margin: 0 0 0.25rem;
+    font-size: 0.8rem;
+    color: #333333; /* Dark Gray */
+  }
+  
+  .project-link {
+    font-size: 0.8rem;
+    color: #008080; /* Teal */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .project-link:hover {
+    color: #d4af37; /* Gold */
+    text-decoration: underline;
+  }
+  
+  /* CTA Button */
+  .cta-button button {
+    padding: 0.5rem 1.5rem;
+    height: 40px;
+    font-weight: 500;
+    background-color: #d4af37; /* Gold */
+    border-color: #d4af37; /* Gold */
+    color: #ffffff; /* White */
+    transition: all 0.3s ease;
+  }
+  
+  .cta-button button:hover {
+    background-color: #002f6c; /* Royal Blue */
+    border-color: #002f6c; /* Royal Blue */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Mobile Menu Toggle */
+  .mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #002f6c; /* Royal Blue */
+    cursor: pointer;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+  }
+  
+  /* Mobile Navigation */
+  .mobile-nav {
+    display: none;
+    background-color: #fff;
+    padding: 1rem;
+    border-top: 1px solid #f5f5f5; /* Light Gray */
+  }
+  
+  .mobile-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .mobile-nav li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .mobile-submenu {
+    padding-left: 1rem;
+    margin-top: 0.5rem;
+    border-left: 2px solid #d4af37; /* Gold */
+  }
+  
+  .mobile-submenu h3 {
+    font-size: 1rem;
+    margin: 1rem 0 0.5rem;
+    color: #002f6c; /* Royal Blue */
+  }
+  
+  .mobile-submenu ul {
+    padding-left: 1rem;
+  }
+  
+  .mobile-submenu a {
+    color: #333333; /* Dark Gray */
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .mobile-submenu a:hover {
+    color: #d4af37; /* Gold */
+  }
+  
+  .mobile-cta {
+    margin-top: 1rem;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 992px) {
+    .desktop-nav,
+    .cta-button {
+      display: none;
+    }
+  
+    .mobile-menu-toggle {
+      display: block;
+    }
+  
+    .mobile-nav {
+      display: block;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .navbar-container {
+      padding: 0 1rem;
+    }
+  
+    .mega-menu {
+      width: 100%;
+      left: 0;
+    }
+  }
+  
+  

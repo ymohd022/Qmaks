@@ -1,0 +1,92 @@
+<footer class="footer-container">
+    <div class="footer-wave">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path fill="#002f6c" fill-opacity="1" d="M0,128L48,144C96,160,192,192,288,186.7C384,181,480,139,576,138.7C672,139,768,181,864,186.7C960,192,1056,160,1152,138.7C1248,117,1344,107,1392,101.3L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+      </svg>
+    </div>
+  
+    <div class="footer-content">
+      <div class="container">
+        <div class="footer-grid">
+          <!-- Quick Links -->
+          <div class="footer-section" @fadeInUp>
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li><a [routerLink]="['/home']">Home</a></li>
+              <li><a [routerLink]="['/about']">About Us</a></li>
+              <li><a [routerLink]="['/projects']">Projects</a></li>
+              <li><a [routerLink]="['/gallery']">Gallery</a></li>
+              <li><a [routerLink]="['/contact']">Contact</a></li>
+            </ul>
+          </div>
+  
+          <!-- Contact Details -->
+          <div class="footer-section" @fadeInUp>
+            <h3>Contact Us</h3>
+            <div class="contact-info">
+              <div class="contact-item">
+                <mat-icon>location_on</mat-icon>
+                <p>123 Construction Avenue, Building Plaza<br>New York, NY 10001</p>
+              </div>
+              <div class="contact-item">
+                <mat-icon>phone</mat-icon>
+                <p>Toll-Free: 1-800-BUILD-NOW</p>
+              </div>
+              <div class="contact-item">
+                <mat-icon>email</mat-icon>
+                <p>info&#64;qmaksbuilders.com</p>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Newsletter -->
+          <div class="footer-section" @fadeInUp>
+            <h3>Newsletter</h3>
+            <p>Subscribe to our newsletter for updates on our latest projects and offers.</p>
+            <div class="newsletter-form">
+              <mat-form-field appearance="outline" class="newsletter-input">
+                <input matInput placeholder="Your Email" type="email">
+              </mat-form-field>
+              <button mat-raised-button color="accent">Subscribe</button>
+            </div>
+          </div>
+  
+          <!-- Social Media -->
+          <div class="footer-section" @fadeInUp>
+            <h3>Connect With Us</h3>
+            <div class="social-icons">
+              <a *ngFor="let social of socialLinks" 
+                 href="{{social.url}}" 
+                 target="_blank" 
+                 class="social-icon" 
+                 [attr.aria-label]="social.label"
+                 @staggeredFadeIn>
+                <mat-icon fontSet="fa" fontIcon="fa-{{social.icon}}"></mat-icon>
+              </a>
+            </div>
+            <div class="footer-logo">
+              <img src="/QMAKS-logo.png" alt="QMAKS Builders & Developers">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Legal Information -->
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="footer-bottom-content">
+          <div class="copyright">
+            <p>&copy; {{currentYear}} QMAKS Builders & Developers. All Rights Reserved.</p>
+          </div>
+          <div class="legal-links">
+            <a [routerLink]="['/privacy-policy']">Privacy Policy</a>
+            <span class="separator">|</span>
+            <a [routerLink]="['/terms-of-use']">Terms of Use</a>
+            <span class="separator">|</span>
+            <a [routerLink]="['/sitemap']">Sitemap</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
