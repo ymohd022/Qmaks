@@ -1,0 +1,137 @@
+<app-navbar></app-navbar>
+<div class="projects-container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h1 class="display-4">Our Projects</h1>
+            <div class="section-divider"></div>
+            <p class="lead">Discover our portfolio of innovative construction projects</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Projects Filter Section -->
+    <section class="filter-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <mat-card>
+              <mat-card-content>
+                <div class="filter-tabs">
+                  <button mat-button [ngClass]="{'active-tab': activeTab === 'all'}" (click)="setActiveTab('all')">
+                    All Projects
+                  </button>
+                  <button mat-button [ngClass]="{'active-tab': activeTab === 'ongoing'}" (click)="setActiveTab('ongoing')">
+                    Ongoing Projects
+                  </button>
+                  <button mat-button [ngClass]="{'active-tab': activeTab === 'completed'}" (click)="setActiveTab('completed')">
+                    Completed Projects
+                  </button>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Projects Listing Section -->
+    <section class="projects-listing">
+      <div class="container">
+        <!-- Loading Spinner -->
+        <div *ngIf="loading" class="text-center py-5">
+          <mat-spinner class="mx-auto"></mat-spinner>
+          <p class="mt-3">Loading projects...</p>
+        </div>
+  
+        <!-- Projects Grid -->
+        <div *ngIf="!loading">
+          <!-- Ongoing Projects -->
+          <div *ngIf="activeTab === 'all' || activeTab === 'ongoing'">
+            <div *ngIf="ongoingProjects.length > 0" class="project-category">
+              <h2>Ongoing Projects</h2>
+              <div class="section-divider-small"></div>
+              <div class="row">
+                <div *ngFor="let project of ongoingProjects" class="col-lg-4 col-md-6 mb-4">
+                  <mat-card class="project-card h-100">
+                    <div class="project-thumbnail">
+                      <img [src]="project.thumbnailImage" [alt]="project.title" class="img-fluid">
+                      <div class="project-status ongoing">Ongoing</div>
+                    </div>
+                    <mat-card-content>
+                      <h3 class="project-title">{{project.title}}</h3>
+                      <div class="project-meta">
+                        <div class="meta-item">
+                          <mat-icon>location_on</mat-icon>
+                          <span>{{project.location}}</span>
+                        </div>
+                        <div class="meta-item">
+                          <mat-icon>straighten</mat-icon>
+                          <span>{{project.size}}</span>
+                        </div>
+                      </div>
+                      <p class="project-description">{{project.description}}</p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                      <a [routerLink]="['/projects', project.id]" mat-raised-button color="primary">View Details</a>
+                    </mat-card-actions>
+                  </mat-card>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="ongoingProjects.length === 0 && activeTab === 'ongoing'" class="no-projects">
+              <p>No ongoing projects at the moment.</p>
+            </div>
+          </div>
+  
+          <!-- Completed Projects -->
+          <div *ngIf="activeTab === 'all' || activeTab === 'completed'">
+            <div *ngIf="completedProjects.length > 0" class="project-category mt-5">
+              <h2>Completed Projects</h2>
+              <div class="section-divider-small"></div>
+              <div class="row">
+                <div *ngFor="let project of completedProjects" class="col-lg-4 col-md-6 mb-4">
+                  <mat-card class="project-card h-100">
+                    <div class="project-thumbnail">
+                      <img [src]="project.thumbnailImage" [alt]="project.title" class="img-fluid">
+                      <div class="project-status completed">Completed</div>
+                    </div>
+                    <mat-card-content>
+                      <h3 class="project-title">{{project.title}}</h3>
+                      <div class="project-meta">
+                        <div class="meta-item">
+                          <mat-icon>location_on</mat-icon>
+                          <span>{{project.location}}</span>
+                        </div>
+                        <div class="meta-item">
+                          <mat-icon>straighten</mat-icon>
+                          <span>{{project.size}}</span>
+                        </div>
+                      </div>
+                      <p class="project-description">{{project.description}}</p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                      <a [routerLink]="['/projects', project.id]" mat-raised-button color="primary">View Details</a>
+                    </mat-card-actions>
+                  </mat-card>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="completedProjects.length === 0 && activeTab === 'completed'" class="no-projects">
+              <p>No completed projects to display.</p>
+            </div>
+          </div>
+  
+          <!-- No Projects Message -->
+          <div *ngIf="ongoingProjects.length === 0 && completedProjects.length === 0" class="no-projects">
+            <p>No projects available at the moment. Please check back later.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <app-footer></app-footer>
+  

@@ -1,0 +1,52 @@
+<app-navbar></app-navbar>
+<div class="login-container">
+    <div class="login-card-container">
+      <mat-card class="login-card">
+        <div class="login-header">
+          <div class="logo-container">
+            <img src="/QMAKS-logo.png" alt="QMAKS Logo" class="login-logo">
+          </div>
+          <h1 class="login-title">Admin Login</h1>
+          <p class="login-subtitle">Enter your credentials to access the admin dashboard</p>
+        </div>
+        
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" placeholder="Enter your email" type="email" required>
+            <mat-icon matPrefix>email</mat-icon>
+            <mat-error *ngIf="loginForm.get('email')?.invalid">{{getEmailErrorMessage()}}</mat-error>
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'" placeholder="Enter your password" required>
+            <mat-icon matPrefix>lock</mat-icon>
+            <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+              <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="loginForm.get('password')?.invalid">{{getPasswordErrorMessage()}}</mat-error>
+          </mat-form-field>
+          
+          <div class="login-actions">
+            <a href="#" class="forgot-password">Forgot Password?</a>
+            <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid || isLoading" class="login-button">
+              <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
+              <span *ngIf="!isLoading">Login</span>
+            </button>
+          </div>
+        </form>
+        
+        <div *ngIf="loginError" class="login-error">
+          <mat-icon>error</mat-icon>
+          <span>{{loginError}}</span>
+        </div>
+      </mat-card>
+      
+      <div class="login-footer">
+        <p>&copy; 2024 QMAKS Builders & Developers. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+  

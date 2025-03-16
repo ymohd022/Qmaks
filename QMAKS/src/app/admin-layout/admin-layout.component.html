@@ -1,0 +1,99 @@
+<mat-sidenav-container class="sidenav-container">
+    <!-- Side Navigation -->
+    <mat-sidenav #drawer class="sidenav" fixedInViewport
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="(isHandset$ | async) === false">
+      <div class="sidenav-header">
+        <img src="/QMAKS-logo.png" alt="QMAKS Logo" class="sidenav-logo">
+        <h2 class="sidenav-title">Admin Panel</h2>
+      </div>
+      
+      <mat-divider></mat-divider>
+      
+      <mat-nav-list class="sidenav-list">
+        <ng-container *ngFor="let item of menuItems">
+          <!-- Menu item with no children -->
+          <a mat-list-item *ngIf="!item.children || item.children.length === 0" 
+             [routerLink]="item.route" 
+             routerLinkActive="active-link"
+             class="nav-item">
+            <mat-icon class="nav-icon">{{item.icon}}</mat-icon>
+            <span class="nav-text">{{item.name}}</span>
+          </a>
+          
+          <!-- Menu item with children -->
+          <div *ngIf="item.children && item.children.length > 0" class="nav-group">
+            <a mat-list-item (click)="toggleMenu(item)" 
+               class="nav-item parent-item" 
+               [class.active-parent]="isChildActive(item)">
+              <mat-icon class="nav-icon">{{item.icon}}</mat-icon>
+              <span class="nav-text">{{item.name}}</span>
+              <mat-icon class="expand-icon">{{item.expanded ? 'expand_less' : 'expand_more'}}</mat-icon>
+            </a>
+            
+            <div class="child-items" [class.expanded]="item.expanded">
+              <a mat-list-item *ngFor="let child of item.children" 
+                 [routerLink]="child.route" 
+                 routerLinkActive="active-link"
+                 class="nav-item child-item">
+                <mat-icon class="nav-icon child-icon">{{child.icon}}</mat-icon>
+                <span class="nav-text">{{child.name}}</span>
+              </a>
+            </div>
+          </div>
+        </ng-container>
+      </mat-nav-list>
+    </mat-sidenav>
+    
+    <!-- Main Content -->
+    <mat-sidenav-content>
+      <!-- Toolbar -->
+      <mat-toolbar color="primary" class="admin-toolbar">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        
+        <span class="toolbar-spacer"></span>
+        
+        <!-- User Menu -->
+        <button mat-button [matMenuTriggerFor]="userMenu" class="user-menu-button">
+          <div class="user-info">
+            <span class="user-name">{{currentUser?.name || 'Admin User'}}</span>
+            <mat-icon>arrow_drop_down</mat-icon>
+          </div>
+          <div class="user-avatar">
+            <mat-icon>account_circle</mat-icon>
+          </div>
+        </button>
+        
+        <mat-menu #userMenu="matMenu" xPosition="before" class="user-menu">
+          <button mat-menu-item>
+            <mat-icon>person</mat-icon>
+            <span>Profile</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            <span>Settings</span>
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      </mat-toolbar>
+      
+      <!-- Page Content -->
+      <div class="content-container">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  
+  

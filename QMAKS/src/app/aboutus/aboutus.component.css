@@ -1,0 +1,302 @@
+/* General Styles */
+.about-container {
+    font-family: "Roboto", sans-serif;
+    color: #333333;
+  }
+  
+  section {
+    padding: 80px 0;
+  }
+  
+  .section-header {
+    margin-bottom: 40px;
+  }
+  
+  .section-header h2 {
+    color: #002f6c; /* Royal Blue */
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+  
+  .section-divider {
+    height: 3px;
+    width: 80px;
+    background-color: #d4af37; /* Gold */
+    margin: 0 auto 20px;
+  }
+  
+  .section-subheading {
+    color: #666;
+    font-size: 1.1rem;
+  }
+  
+  .section-subheader h3 {
+    color: #002f6c; /* Royal Blue */
+    margin-bottom: 10px;
+  }
+  
+  /* Hero Section */
+  .hero-section {
+    background-color: #f5f5f5; /* Light Gray */
+    padding: 100px 0;
+  }
+  
+  .hero-section h1 {
+    color: #002f6c; /* Royal Blue */
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+  
+  .hero-section .lead {
+    color: #d4af37; /* Gold */
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Company Overview Section */
+  .overview-section {
+    background-color: #ffffff; /* White */
+  }
+  
+  .value-item {
+    padding: 20px;
+    transition: all 0.3s ease;
+  }
+  
+  .value-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .value-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #f4e1c1; /* Soft Beige */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+  }
+  
+  .value-icon mat-icon {
+    font-size: 30px;
+    color: #002f6c; /* Royal Blue */
+  }
+  
+  .value-item h4 {
+    color: #002f6c; /* Royal Blue */
+    margin-bottom: 10px;
+  }
+  
+  /* Team Section */
+  .team-section {
+    background-color: #f5f5f5; /* Light Gray */
+  }
+  
+  .team-card {
+    transition: all 0.3s ease;
+  }
+  
+  .team-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .team-image {
+    height: 250px;
+    object-fit: cover;
+  }
+  
+  .team-name {
+    color: #002f6c; /* Royal Blue */
+    margin: 15px 0 5px;
+    font-weight: 600;
+  }
+  
+  .team-position {
+    color: #d4af37; /* Gold */
+    margin-bottom: 15px;
+    font-weight: 500;
+  }
+  
+  .team-bio {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+  
+  .team-social {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .social-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #002f6c; /* Royal Blue */
+    color: #ffffff; /* White */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  
+  .social-icon:hover {
+    background-color: #d4af37; /* Gold */
+    transform: translateY(-3px);
+  }
+  
+  /* Milestones Section */
+  .milestones-section {
+    background-color: #ffffff; /* White */
+  }
+  
+  .timeline-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .milestone-content {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+  }
+  
+  .milestone-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #f4e1c1; /* Soft Beige */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    flex-shrink: 0;
+  }
+  
+  .milestone-icon mat-icon {
+    font-size: 30px;
+    color: #002f6c; /* Royal Blue */
+  }
+  
+  /* Impact Section */
+  .impact-section {
+    background-color: #f5f5f5; /* Light Gray */
+  }
+  
+  .metric-item {
+    padding: 20px;
+    transition: all 0.3s ease;
+  }
+  
+  .metric-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .metric-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #f4e1c1; /* Soft Beige */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+  }
+  
+  .metric-icon mat-icon {
+    font-size: 30px;
+    color: #002f6c; /* Royal Blue */
+  }
+  
+  .metric-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #d4af37; /* Gold */
+    margin-bottom: 10px;
+  }
+  
+  .metric-item h4 {
+    color: #002f6c; /* Royal Blue */
+  }
+  
+  .initiative-image {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  /* CTA Section */
+  .cta-section {
+    background-color: #008080; /* Teal */
+    color: #ffffff; /* White */
+    padding: 60px 0;
+  }
+  
+  .cta-section h2 {
+    color: #ffffff; /* White */
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+  }
+  
+  .cta-button {
+    background-color: #d4af37 !important; /* Gold */
+    color: #ffffff; /* White */
+    padding: 10px 30px !important;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .cta-button:hover {
+    background-color: #ffffff !important;
+    color: #008080 !important; /* Teal */
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 992px) {
+    section {
+      padding: 60px 0;
+    }
+  
+    .hero-section {
+      padding: 80px 0;
+    }
+  
+    .hero-section h1 {
+      font-size: 2.5rem;
+    }
+  
+    .hero-section .lead {
+      font-size: 1.3rem;
+    }
+  
+    .cta-section h2 {
+      font-size: 2rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .team-image {
+      height: 200px;
+    }
+  
+    .milestone-content {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .milestone-icon {
+      margin-right: 0;
+      margin-bottom: 15px;
+    }
+  }
+  
+  

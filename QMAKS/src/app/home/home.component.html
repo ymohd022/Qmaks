@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <!-- Hero Section -->
 <section class="hero-section">
   <div class="hero-slider">
@@ -13,7 +14,7 @@
               <button mat-raised-button color="primary" class="hero-btn" (click)="enquireNow()">
                 Enquire Now
               </button>
-              <button mat-raised-button color="primary" class="hero-btn">
+              <button mat-raised-button color="primary" class="hero-btn" routerLink="/project">
                 View Projects
               </button>
             </div>
@@ -102,7 +103,7 @@
               <span>Customer Support</span>
             </div>
           </div>
-          <button mat-raised-button color="primary" routerLink="/about">
+          <button mat-raised-button color="primary" routerLink="/aboutus">
             Learn More About Us
           </button>
         </div>
@@ -175,7 +176,7 @@
     </div>
     
     <div class="text-center view-all-projects">
-      <button mat-raised-button color="primary" routerLink="/projects">
+      <button mat-raised-button color="primary" routerLink="/project">
         View All Projects
       </button>
     </div>
@@ -284,3 +285,4 @@
     </div>
   </div>
 </section>
+<app-footer></app-footer>
