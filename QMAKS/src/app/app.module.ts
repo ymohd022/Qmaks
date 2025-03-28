@@ -31,6 +31,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatListModule } from "@angular/material/list"
+import { MatTableModule } from "@angular/material/table"
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -48,7 +49,11 @@ import { ContactComponent } from './contact/contact.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { LoginComponent } from './login/login.component';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
-import { DashboardComponent } from './dashboard/dashboard.component'
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { SplashScreenComponent } from './splash-screen/splash-screen.component';
+import { HeroImagesComponent } from './dashboard/hero-images/hero-images.component';
+import { HeroImageFormDialogComponent } from './dashboard/hero-images/hero-image-form-dialog/hero-image-form-dialog.component'
+import { ConfirmDialogComponent } from "./dashboard/hero-images/hero-image-form-dialog/confirm-dialog.component";
 
 @NgModule({
   declarations: [
@@ -64,7 +69,11 @@ import { DashboardComponent } from './dashboard/dashboard.component'
     GalleryComponent,
     LoginComponent,
     AdminLayoutComponent,
-    DashboardComponent
+    DashboardComponent,
+    SplashScreenComponent,
+    HeroImagesComponent,
+    HeroImageFormDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -98,6 +107,7 @@ import { DashboardComponent } from './dashboard/dashboard.component'
     MatTooltipModule,
     MatListModule,
     NgChartsModule,
+    MatTableModule,
 
     
     

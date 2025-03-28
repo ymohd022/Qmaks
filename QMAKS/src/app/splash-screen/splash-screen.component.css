@@ -1,0 +1,234 @@
+.splash-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #001a4d 0%, #002f6c 50%, #001a4d 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.splash-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  z-index: 10;
+}
+
+/* Logo Animation Container */
+.logo-animation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.logo-wrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+}
+
+/* Building Element */
+.building-element {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 120px;
+  z-index: 2;
+}
+
+.building-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Crane Element */
+.crane-element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 150px;
+  z-index: 1;
+}
+
+.cranes-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Company Name */
+.company-name {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.text-char {
+  display: inline-block;
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  margin: 0 2px;
+  letter-spacing: 2px;
+}
+
+/* Company Tagline */
+.company-tagline {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #e74c3c;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+}
+
+/* Progress Bar */
+.progress-container {
+  position: relative;
+  width: 200px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 40px;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #d4af37, #e74c3c);
+  width: 0%;
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
+}
+
+/* Animated Background Elements */
+.bg-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.05;
+  background: linear-gradient(135deg, #d4af37, #e74c3c);
+}
+
+.circle-1 {
+  width: 300px;
+  height: 300px;
+  top: -100px;
+  left: -100px;
+  animation: float 15s infinite ease-in-out;
+}
+
+.circle-2 {
+  width: 500px;
+  height: 500px;
+  bottom: -200px;
+  right: -200px;
+  animation: float 20s infinite ease-in-out reverse;
+}
+
+.circle-3 {
+  width: 200px;
+  height: 200px;
+  top: 50%;
+  left: 20%;
+  animation: float 12s infinite ease-in-out 2s;
+}
+
+.bg-square {
+  position: absolute;
+  opacity: 0.05;
+  background: linear-gradient(135deg, #d4af37, #e74c3c);
+  transform: rotate(45deg);
+}
+
+.square-1 {
+  width: 200px;
+  height: 200px;
+  top: 20%;
+  right: 10%;
+  animation: rotate 25s infinite linear;
+}
+
+.square-2 {
+  width: 150px;
+  height: 150px;
+  bottom: 20%;
+  left: 10%;
+  animation: rotate 20s infinite linear reverse;
+}
+
+/* Animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(30px, 30px);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .logo-wrapper {
+    width: 160px;
+    height: 160px;
+  }
+
+  .text-char {
+    font-size: 2.8rem;
+  }
+
+  .company-tagline {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-wrapper {
+    width: 140px;
+    height: 140px;
+  }
+
+  .text-char {
+    font-size: 2.5rem;
+  }
+}
+

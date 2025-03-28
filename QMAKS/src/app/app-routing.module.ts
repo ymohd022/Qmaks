@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
+import { HeroImagesComponent } from './dashboard/hero-images/hero-images.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -26,6 +27,7 @@ const routes: Routes = [
     // canActivate: [AuthGuard],
     children: [
       { path: "dashboard", component: DashboardComponent },
+      { path: "home/hero-images", component: HeroImagesComponent },
       // Add other admin routes here
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
     ],

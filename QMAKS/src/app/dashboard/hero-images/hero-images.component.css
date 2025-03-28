@@ -1,0 +1,255 @@
+.hero-images-container {
+    padding-bottom: 30px;
+  }
+  
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .page-title {
+    color: #002f6c; /* Royal Blue */
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  
+  .page-subtitle {
+    color: #666;
+    font-size: 1rem;
+    margin: 0;
+  }
+  
+  .add-button {
+    background-color: #002f6c; /* Royal Blue */
+    color: white;
+  }
+  
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0;
+  }
+  
+  .loading-container p {
+    margin-top: 20px;
+    color: #666;
+  }
+  
+  .section-title {
+    color: #002f6c; /* Royal Blue */
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  
+  /* Hero Images Preview */
+  .hero-images-preview {
+    margin-bottom: 40px;
+  }
+  
+  .preview-container {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .preview-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
+  
+  .preview-slide {
+    flex: 0 0 auto;
+    width: 80%;
+    max-width: 800px;
+    scroll-snap-align: center;
+  }
+  
+  .preview-image {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .preview-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 47, 108, 0.8), rgba(0, 0, 0, 0.4));
+  }
+  
+  .preview-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    color: white;
+    z-index: 1;
+  }
+  
+  .preview-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  
+  .preview-subtitle {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #d4af37; /* Gold */
+  }
+  
+  .preview-description {
+    font-size: 1rem;
+    margin: 0;
+    opacity: 0.9;
+  }
+  
+  .preview-order {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: #002f6c; /* Royal Blue */
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    z-index: 1;
+  }
+  
+  .no-images {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .no-images mat-icon {
+    font-size: 64px;
+    height: 64px;
+    width: 64px;
+    color: #ccc;
+    margin-bottom: 20px;
+  }
+  
+  .no-images p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  /* Hero Images Table */
+  .hero-images-table {
+    width: 100%;
+  }
+  
+  .table-container {
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+  }
+  
+  .table-image {
+    width: 80px;
+    height: 50px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 4px;
+  }
+  
+  .description-cell {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .order-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .order-value {
+    width: 20px;
+    text-align: center;
+    font-weight: 600;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .no-data-message {
+    padding: 20px;
+    text-align: center;
+    color: #666;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 992px) {
+    .page-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+  
+    .preview-slide {
+      width: 90%;
+    }
+  
+    .preview-image {
+      height: 250px;
+    }
+  
+    .preview-title {
+      font-size: 1.5rem;
+    }
+  
+    .preview-subtitle {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .preview-slide {
+      width: 100%;
+    }
+  
+    .preview-image {
+      height: 200px;
+    }
+  
+    .table-container {
+      overflow-x: auto;
+    }
+  }
+  
+  

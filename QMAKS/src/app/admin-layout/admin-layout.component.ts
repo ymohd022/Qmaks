@@ -32,7 +32,6 @@ export class AdminLayoutComponent implements OnInit {
       children: [
         { name: "Hero Images", route: "/admin/home/hero-images", icon: "image" },
         { name: "Content", route: "/admin/home/content", icon: "edit" },
-        { name: "Videos", route: "/admin/home/videos", icon: "videocam" },
       ],
     },
     {

@@ -1,0 +1,78 @@
+<div class="dialog-container">
+    <h2 mat-dialog-title>{{formTitle}}</h2>
+    
+    <form [formGroup]="heroImageForm" (ngSubmit)="onSubmit()">
+      <mat-dialog-content>
+        <div class="form-content">
+          <!-- Image Upload -->
+          <div class="image-upload-container">
+            <div class="image-preview" *ngIf="imagePreview">
+              <img [src]="imagePreview" alt="Image Preview">
+            </div>
+            <div class="image-upload" *ngIf="!imagePreview">
+              <mat-icon>cloud_upload</mat-icon>
+              <p>Click to select an image</p>
+            </div>
+            <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*" style="display: none;">
+            <button type="button" mat-raised-button color="primary" (click)="fileInput.click()" class="upload-button">
+              {{imagePreview ? 'Change Image' : 'Select Image'}}
+            </button>
+            <mat-error *ngIf="heroImageForm.get('image')?.invalid && heroImageForm.get('image')?.touched">
+              Image is required
+            </mat-error>
+          </div>
+          
+          <!-- Form Fields -->
+          <div class="form-fields">
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Title</mat-label>
+              <input matInput formControlName="title" placeholder="Enter hero image title">
+              <mat-error *ngIf="heroImageForm.get('title')?.hasError('required')">
+                Title is required
+              </mat-error>
+              <mat-error *ngIf="heroImageForm.get('title')?.hasError('maxlength')">
+                Title cannot exceed 100 characters
+              </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Subtitle</mat-label>
+              <input matInput formControlName="subtitle" placeholder="Enter hero image subtitle">
+              <mat-error *ngIf="heroImageForm.get('subtitle')?.hasError('maxlength')">
+                Subtitle cannot exceed 100 characters
+              </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Description</mat-label>
+              <textarea matInput formControlName="description" placeholder="Enter hero image description" rows="3"></textarea>
+              <mat-error *ngIf="heroImageForm.get('description')?.hasError('maxlength')">
+                Description cannot exceed 200 characters
+              </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Display Order</mat-label>
+              <input matInput type="number" formControlName="displayOrder" min="1">
+              <mat-error *ngIf="heroImageForm.get('displayOrder')?.hasError('required')">
+                Display order is required
+              </mat-error>
+              <mat-error *ngIf="heroImageForm.get('displayOrder')?.hasError('min')">
+                Display order must be at least 1
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-dialog-content>
+      
+      <mat-dialog-actions align="end">
+        <button mat-button type="button" (click)="onCancel()" [disabled]="isLoading">Cancel</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="heroImageForm.invalid || isLoading">
+          <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
+          <span *ngIf="!isLoading">{{submitButtonText}}</span>
+        </button>
+      </mat-dialog-actions>
+    </form>
+  </div>
+  
+  
