@@ -14,7 +14,7 @@
 
 .hero-slide {
   position: absolute;
-  top: 90px;
+  top: 80px;
   left: 0;
   width: 100%;
   height: 100%;
@@ -618,6 +618,10 @@
   .hero-title {
     font-size: 2.5rem;
   }
+
+  .hero-slide {
+    top: -20px;
+  }
   
   .hero-subtitle {
     font-size: 1.5rem;
@@ -679,6 +683,14 @@
   .slider-control {
     width: 40px;
     height: 40px;
+  }
+
+  .slider-control.prev {
+    margin-top: 90px;
+  }
+  
+  .slider-control.next {
+    margin-top: 90px;
   }
   
   .slider-control mat-icon {

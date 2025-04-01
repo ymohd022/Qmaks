@@ -1,262 +1,271 @@
 /* Footer Container */
 .footer-container {
-    position: relative;
-    background-color: #002f6c; /* Royal Blue */
-    color: #ffffff;
-    overflow: hidden;
-    margin-top: 4rem;
-  }
-  
-  /* Wave SVG */
-  .footer-wave {
-    position: absolute;
-    top: -100px;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    line-height: 0;
-  }
-  
-  .footer-wave svg {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100px;
-  }
-  
-  /* Footer Content */
-  .footer-content {
-    position: relative;
-    padding: 4rem 0 2rem;
-    z-index: 1;
-  }
-  
+  position: relative;
+  background-color: #002f6c; /* Royal Blue */
+  color: #ffffff;
+  overflow: hidden;
+  margin-top: 4rem;
+}
+
+/* Wave SVG */
+.footer-wave {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  line-height: 0;
+}
+
+.footer-wave svg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100px;
+}
+
+/* Footer Content */
+.footer-content {
+  position: relative;
+  padding: 4rem 0 2rem;
+  z-index: 1;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+/* Footer Sections */
+.footer-section {
+  margin-bottom: 1.5rem;
+}
+
+.footer-section h3 {
+  color: #d4af37; /* Gold */
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.footer-section h3::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  height: 2px;
+  background-color: #d4af37; /* Gold */
+}
+
+/* Footer Links */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  position: relative;
+}
+
+.footer-links a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: #d4af37; /* Gold */
+  transition: width 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #d4af37; /* Gold */
+  transform: translateX(5px);
+}
+
+.footer-links a:hover::after {
+  width: 100%;
+}
+
+/* Contact Info */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.contact-item mat-icon {
+  color: #d4af37; /* Gold */
+  margin-top: 0.25rem;
+}
+
+.contact-item p  {
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Newsletter */
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.newsletter-input {
+  width: 100%;
+}
+
+/* Social Icons - Updated to match Leadership section */
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #002f6c; /* Royal Blue */
+  color: #ffffff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.social-icon i {
+  font-size: 18px;
+}
+
+.social-icon:hover {
+  background-color: #d4af37; /* Gold */
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer Logo */
+.footer-logo {
+  margin-top: 1.5rem;
+}
+
+.footer-logo img {
+  max-width: 150px;
+  height: auto;
+  background-color: #ffffff;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 1.5rem 0;
+}
+
+.footer-bottom-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.copyright p {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.legal-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.legal-links a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.legal-links a:hover {
+  color: #d4af37; /* Gold */
+}
+
+.separator {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
   .footer-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  /* Footer Sections */
-  .footer-section {
-    margin-bottom: 1.5rem;
-  }
-  
-  .footer-section h3 {
-    color: #d4af37; /* Gold */
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 1.25rem;
-    position: relative;
-    padding-bottom: 0.75rem;
-  }
-  
-  .footer-section h3::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 50px;
-    height: 2px;
-    background-color: #d4af37; /* Gold */
-  }
-  
-  /* Footer Links */
-  .footer-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .footer-links li {
-    margin-bottom: 0.75rem;
-  }
-  
-  .footer-links a {
-    color: #ffffff;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: inline-block;
-    position: relative;
-  }
-  
-  .footer-links a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -2px;
-    left: 0;
-    background-color: #d4af37; /* Gold */
-    transition: width 0.3s ease;
-  }
-  
-  .footer-links a:hover {
-    color: #d4af37; /* Gold */
-    transform: translateX(5px);
-  }
-  
-  .footer-links a:hover::after {
-    width: 100%;
-  }
-  
-  /* Contact Info */
-  .contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .contact-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-  }
-  
-  .contact-item mat-icon {
-    color: #d4af37; /* Gold */
-    margin-top: 0.25rem;
-  }
-  
-  .contact-item p {
-    margin: 0;
-    line-height: 1.5;
-  }
-  
-  /* Newsletter */
-  .newsletter-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .newsletter-input {
-    width: 100%;
-  }
-  
-  /* Social Icons */
-  .social-icons {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .social-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-    transition: all 0.3s ease;
-  }
-  
-  .social-icon:hover {
-    background-color: #d4af37; /* Gold */
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Footer Logo */
-  .footer-logo {
-    margin-top: 1.5rem;
-  }
-  
-  .footer-logo img {
-    max-width: 150px;
-    height: auto;
-    background-color: #ffffff;
-  }
-  
-  /* Footer Bottom */
-  .footer-bottom {
-    background-color: rgba(0, 0, 0, 0.2);
-    padding: 1.5rem 0;
-  }
-  
+}
+
+@media (max-width: 768px) {
   .footer-bottom-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-section h3::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .footer-section {
+    text-align: center;
+  }
+
+  .contact-item {
+    justify-content: center;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+
+  .footer-logo {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
+    justify-content: center;
   }
-  
-  .copyright p {
-    margin: 0;
-    font-size: 0.875rem;
+}
+
+@media (max-width: 576px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
   }
-  
-  .legal-links {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.875rem;
+
+  .footer-wave {
+    top: -50px;
+    height: 50px;
   }
-  
-  .legal-links a {
-    color: #ffffff;
-    text-decoration: none;
-    transition: color 0.3s ease;
+
+  .footer-wave svg {
+    height: 50px;
   }
-  
-  .legal-links a:hover {
-    color: #d4af37; /* Gold */
-  }
-  
-  .separator {
-    color: rgba(255, 255, 255, 0.5);
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 992px) {
-    .footer-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .footer-bottom-content {
-      flex-direction: column;
-      text-align: center;
-    }
-    
-    .footer-section h3::after {
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    
-    .footer-section {
-      text-align: center;
-    }
-    
-    .contact-item {
-      justify-content: center;
-    }
-    
-    .social-icons {
-      justify-content: center;
-    }
-    
-    .footer-logo {
-      display: flex;
-      justify-content: center;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .footer-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .footer-wave {
-      top: -50px;
-      height: 50px;
-    }
-    
-    .footer-wave svg {
-      height: 50px;
-    }
-  }
+}
+

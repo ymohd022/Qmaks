@@ -2,11 +2,12 @@
 .gallery-header {
     background-color: #f5f5f5;
     padding: 80px 0 40px;
-    margin-top: 83px;
+    
   }
   
   .section-title {
     margin-bottom: 30px;
+    margin-top: 83px;
   }
 
   .section-title .subtitle {

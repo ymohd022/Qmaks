@@ -104,33 +104,65 @@
     </section>
   
     <!-- Team & Leadership Section -->
-    <section class="team-section">
-      <div class="container">
-        <div class="section-header text-center">
-          <h2>Our Team & Leadership</h2>
-          <div class="section-divider"></div>
-          <p class="section-subheading">Meet the experts behind our success</p>
-        </div>
-  
-        <div class="row mt-5">
-          <div *ngFor="let member of teamMembers" class="col-lg-3 col-md-6 mb-4">
-            <mat-card class="team-card h-100">
-              <img mat-card-image [src]="member.image" [alt]="member.name" class="team-image">
-              <mat-card-content class="text-center">
-                <h3 class="team-name">{{member.name}}</h3>
-                <p class="team-position">{{member.position}}</p>
-                <p class="team-bio">{{member.bio}}</p>
-                <div class="team-social">
+  <section class="team-section">
+    <div class="container">
+      <div class="section-header text-center">
+        <h2>Leadership</h2>
+        <div class="section-divider"></div>
+        <p class="section-subheading">The visionary behind our success</p>
+      </div>
+
+      <div class="ceo-profile-container mt-5">
+        <div class="row">
+          <div class="col-lg-5 col-md-6 mb-4">
+            <div class="ceo-image-container">
+              <img src="profile.png" alt="Eng. Qasim Makkawi - Founder & CEO" class="ceo-image">
+              <div class="ceo-image-overlay">
+                <div class="ceo-social">
                   <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
                   <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
                   <a href="#" class="social-icon"><i class="bi bi-envelope"></i></a>
                 </div>
-              </mat-card-content>
-            </mat-card>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-7 col-md-6">
+            <div class="ceo-details">
+              <h3 class="ceo-name">Eng. Qasim Makkawi</h3>
+              <p class="ceo-position">Founder & Chief Executive Officer</p>
+              
+              <div class="ceo-quote">
+                <i class="bi bi-quote"></i>
+                <blockquote>
+                  "Excellence in construction isn't just about building structures; it's about creating spaces that inspire, endure, and transform communities. At QMAKS, we don't just build for today—we build legacies for tomorrow."
+                </blockquote>
+              </div>
+              
+              <div class="ceo-bio">
+                <p>With over 25 years of experience in the construction industry, Eng. Qasim Makkawi has established himself as a visionary leader and innovator. After graduating with honors in Civil Engineering from King Fahd University of Petroleum and Minerals, he spent a decade working with international construction firms before founding QMAKS in 2010.</p>
+                
+                <p>Under his leadership, QMAKS has grown from a small local contractor to one of the region's most respected construction and development companies, with a portfolio of landmark projects across residential, commercial, and industrial sectors.</p>
+                
+                <p>Eng. Qasim is known for his unwavering commitment to quality, sustainability, and technological innovation. He has pioneered the adoption of Building Information Modeling (BIM) and green building practices in the region, earning numerous industry accolades for his forward-thinking approach.</p>
+                
+                <p>Beyond his professional achievements, Eng. Qasim is deeply committed to community development and mentorship. He serves on the boards of several educational institutions and regularly speaks at industry conferences about the future of construction and sustainable development.</p>
+              </div>
+              
+              <div class="ceo-achievements">
+                <h4>Key Achievements</h4>
+                <ul>
+                  <li><i class="bi bi-trophy"></i> Construction Excellence Award (2018)</li>
+                  <li><i class="bi bi-award"></i> Sustainability Leadership Recognition (2020)</li>
+                  <li><i class="bi bi-star"></i> Named among "Top 50 Construction Leaders" by Construction Weekly (2022)</li>
+                  <li><i class="bi bi-building"></i> Led over 100 successful major construction projects</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
   
     <!-- Milestones/Awards Section -->
     <section class="milestones-section">

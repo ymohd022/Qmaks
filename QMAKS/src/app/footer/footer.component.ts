@@ -27,16 +27,6 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 })
 export class FooterComponent implements OnInit {
   currentYear: number = new Date().getFullYear();
-  
-  // Social media links
-  socialLinks = [
-    { icon: 'facebook', url: 'https://facebook.com/', label: 'Facebook' },
-    { icon: 'instagram', url: 'https://instagram.com/', label: 'Instagram' },
-    { icon: 'twitter', url: 'https://twitter.com/', label: 'Twitter' },
-    { icon: 'linkedin', url: 'https://linkedin.com/', label: 'LinkedIn' },
-    { icon: 'youtube', url: 'https://youtube.com/', label: 'YouTube' }
-  ];
-
   constructor() { }
 
   ngOnInit(): void {

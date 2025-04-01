@@ -1,187 +1,192 @@
 .contact-page {
-    min-height: 100vh;
-    padding: 50px;
-    margin-top: 45px;
-  }
-  
-  .contact-header {
-    background-color: #f5f5f5;
-    padding: 60px 0 40px;
-    margin-bottom: 30px;
-    
-    .contact-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: #333;
-    }
-    
-    .contact-subtitle {
-      font-size: 1.2rem;
-      color: #666;
-      max-width: 600px;
-    }
-  }
-  
-  .contact-content {
-    margin-bottom: 60px;
-  }
-  
-  .contact-form-card, .contact-info-card, .map-card {
-    height: 100%;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  .contact-form {
-    padding: 20px 0;
-    
-    .form-actions {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 20px;
-    }
-    
-    .submit-button {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 0 24px;
-      height: 48px;
-      
-      .spinner {
-        margin-left: 10px;
-      }
-    }
-  }
-  
+  min-height: 100vh;
+  padding: 50px;
+  /* margin-top: 45px; */
+}
+
+.contact-header {
+  background-color: #f5f5f5;
+  padding: 60px 0 40px;
+  margin-bottom: 30px;
+  margin-top: 45px;
+}
+
+.contact-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.contact-subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  max-width: 600px;
+}
+
+.contact-content {
+  margin-bottom: 60px;
+}
+
+.contact-form-card,
+.contact-info-card,
+.map-card {
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form {
+  padding: 20px 0;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.submit-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 24px;
+  height: 48px;
+}
+
+.spinner {
+  margin-left: 10px;
+}
+
+.contact-info-card {
+  background-color: #002f6c; /* Royal Blue */
+  color: white;
+}
+
+.contact-info-card .mat-card-header {
+  color: white;
+}
+
+.contact-info-card .mat-card-title,
+.contact-info-card .mat-card-subtitle {
+  color: white;
+}
+
+.contact-info-list {
+  margin: 20px 0;
+}
+
+.contact-info-item {
+  display: flex;
+  margin-bottom: 25px;
+}
+
+.icon-container {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+
+.icon-container .mat-icon {
+  color: white;
+}
+
+.info-content h4 {
+  margin: 0 0 5px;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.info-content p {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.info-content p a {
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+}
+
+.info-content p a:hover {
+  border-bottom-style: solid;
+}
+
+.social-media-links {
+  margin-top: 30px;
+}
+
+.social-media-links h4 {
+  margin: 0 0 15px;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* Updated Social Icons to match Leadership section */
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #002f6c; /* Royal Blue */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: #ffffff;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.social-icon i {
+  font-size: 18px;
+}
+
+.social-icon:hover {
+  background-color: #d4af37; /* Gold */
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.google-map {
+  height: 400px;
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+@media (max-width: 992px) {
   .contact-info-card {
-    background-color: #1976d2;
-    color: white;
-    
-    .mat-card-header {
-      color: white;
-      
-      .mat-card-title, .mat-card-subtitle {
-        color: white;
-      }
-    }
-  }
-  
-  .contact-info-list {
-    margin: 20px 0;
-  }
-  
-  .contact-info-item {
-    display: flex;
-    margin-bottom: 25px;
-    
-    .icon-container {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 15px;
-      
-      .mat-icon {
-        color: white;
-      }
-    }
-    
-    .info-content {
-      h4 {
-        margin: 0 0 5px;
-        font-size: 1.1rem;
-        font-weight: 500;
-      }
-      
-      p {
-        margin: 0;
-        font-size: 0.95rem;
-        opacity: 0.9;
-        
-        a {
-          color: white;
-          text-decoration: none;
-          border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
-          
-          &:hover {
-            border-bottom-style: solid;
-          }
-        }
-      }
-    }
-  }
-  
-  .social-media-links {
     margin-top: 30px;
-    
-    h4 {
-      margin: 0 0 15px;
-      font-size: 1.1rem;
-      font-weight: 500;
-    }
-    
-    .social-icons {
-      display: flex;
-      gap: 15px;
-      
-      .social-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-        
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.3);
-          transform: translateY(-3px);
-        }
-        
-        .mat-icon {
-          color: white;
-          width: 20px;
-          height: 20px;
-        }
-      }
-    }
   }
-  
+}
+
+@media (max-width: 576px) {
+  .contact-header {
+    padding: 40px 0 30px;
+  }
+
+  .contact-title {
+    font-size: 2rem;
+  }
+
+  .contact-subtitle {
+    font-size: 1rem;
+  }
+
   .google-map {
-    height: 400px;
-    width: 100%;
-    border-radius: 4px;
-    overflow: hidden;
+    height: 300px;
   }
-  
-  
-  @media (max-width: 992px) {
-    .contact-info-card {
-      margin-top: 30px;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .contact-header {
-      padding: 40px 0 30px;
-      
-      .contact-title {
-        font-size: 2rem;
-      }
-      
-      .contact-subtitle {
-        font-size: 1rem;
-      }
-    }
-    
-    .google-map {
-      height: 300px;
-    }
-  }
+}
+

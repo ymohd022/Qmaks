@@ -30,11 +30,11 @@
               </div>
               <div class="contact-item">
                 <mat-icon>phone</mat-icon>
-                <p>Toll-Free: 1-800-BUILD-NOW</p>
+                <p>Toll-Free: 1800 1200 786</p>
               </div>
               <div class="contact-item">
                 <mat-icon>email</mat-icon>
-                <p>info&#64;qmaksbuilders.com</p>
+                <p>helpline&#64;qmaks.com</p>
               </div>
             </div>
           </div>
@@ -51,23 +51,30 @@
             </div>
           </div>
   
-          <!-- Social Media -->
-          <div class="footer-section" @fadeInUp>
-            <h3>Connect With Us</h3>
-            <div class="social-icons">
-              <a *ngFor="let social of socialLinks" 
-                 href="{{social.url}}" 
-                 target="_blank" 
-                 class="social-icon" 
-                 [attr.aria-label]="social.label"
-                 @staggeredFadeIn>
-                <mat-icon fontSet="fa" fontIcon="fa-{{social.icon}}"></mat-icon>
-              </a>
-            </div>
-            <div class="footer-logo">
-              <img src="./footerlogo.png" alt="QMAKS Builders & Developers">
-            </div>
+           <!-- Social Media -->
+        <div class="footer-section" @fadeInUp>
+          <h3>Connect With Us</h3>
+          <div class="social-icons">
+            <a href="https://linkedin.com/" target="_blank" class="social-icon" aria-label="LinkedIn">
+              <i class="bi bi-linkedin"></i>
+            </a>
+            <a href="https://twitter.com/" target="_blank" class="social-icon" aria-label="Twitter">
+              <i class="bi bi-twitter"></i>
+            </a>
+            <a href="https://facebook.com/" target="_blank" class="social-icon" aria-label="Facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://instagram.com/" target="_blank" class="social-icon" aria-label="Instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="mailto:helpline@qmaks.com" class="social-icon" aria-label="Email">
+              <i class="bi bi-envelope"></i>
+            </a>
           </div>
+          <div class="footer-logo">
+            <img src="./footerlogo.png" alt="QMAKS Builders & Developers">
+          </div>
+        </div>
         </div>
       </div>
     </div>

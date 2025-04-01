@@ -42,8 +42,8 @@
   .project-header {
     background-color: #002f6c; /* Royal Blue */
     color: #ffffff;
-    padding: 60px 0;
-    margin-top: 86px;
+    padding: 110px 0;
+    
   }
   
   .project-title {
@@ -219,7 +219,7 @@
   
   @media (max-width: 768px) {
     .project-header {
-      padding: 40px 0;
+      padding: 110px 0;
     }
   
     .project-meta {

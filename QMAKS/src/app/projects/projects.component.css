@@ -2,11 +2,12 @@
 .projects-container {
     font-family: "Roboto", sans-serif;
     color: #333333;
-    margin-top: 85px;
+    
   }
   
   section {
     padding: 60px 0;
+    
   }
   
   .section-divider {
@@ -27,7 +28,7 @@
   .hero-section {
     background-color: #002f6c; /* Royal Blue */
     color: #ffffff;
-    padding: 80px 0;
+    padding: 127px 0;
     text-align: center;
   }
   
@@ -177,7 +178,7 @@
   
   @media (max-width: 768px) {
     .hero-section {
-      padding: 60px 0;
+      padding: 127px 0;
     }
   
     .hero-section h1 {

@@ -52,33 +52,7 @@ export class AboutusComponent  implements OnInit {
     },
   ]
 
-  // Team members data
-  teamMembers = [
-    {
-      name: "Eng. Qasim Makkawi",
-      position: "Founder & CEO",
-      bio: "With over 25 years of experience in the construction industry, Eng. Qasim has led QMAKS to become a leader in innovative construction solutions.",
-      image: "profile.png",
-    },
-    {
-      name: "Eng. Ahmed Al-Harbi",
-      position: "Chief Operations Officer",
-      bio: "Eng. Ahmed oversees all operational aspects of QMAKS, ensuring projects are delivered on time and to the highest standards.",
-      image: "profile.png",
-    },
-    {
-      name: "Dr. Sarah Al-Otaibi",
-      position: "Chief Technical Officer",
-      bio: "Dr. Sarah brings her extensive knowledge in structural engineering to lead our technical team in developing innovative construction methodologies.",
-      image: "profile.png",
-    },
-    {
-      name: "Mohammed Al-Qahtani",
-      position: "Chief Financial Officer",
-      bio: "Mohammed ensures the financial health of QMAKS, managing investments and financial strategies for sustainable growth.",
-      image: "profile.png",
-    },
-  ]
+  
 
   // Customer satisfaction metrics
   satisfactionMetrics = [

@@ -18,24 +18,20 @@ export class ContactComponent implements OnInit, AfterViewInit {
   contactForm!: FormGroup;
   isSubmitting = false;
   submitted = false;
+
   
   // Company information
+  // Company information
   companyInfo = {
-    name: 'Your Company Name',
-    address: '123 Business Avenue, Suite 200, New York, NY 10001',
-    phone: '903-233-2744',
-    email: 'info@yourcompany.com',
-    hours: 'Monday - Friday: 9:00 AM - 5:00 PM',
-    socialMedia: [
-      { name: 'Facebook', icon: 'facebook', url: 'https://facebook.com/yourcompany' },
-      { name: 'Twitter', icon: 'twitter', url: 'https://twitter.com/yourcompany' },
-      { name: 'Instagram', icon: 'instagram', url: 'https://instagram.com/yourcompany' },
-      { name: 'LinkedIn', icon: 'linkedin', url: 'https://linkedin.com/company/yourcompany' }
-    ],
+    name: "QMAKS Builders & Developers",
+    address: "Plot no -87/88 SA COLONY, 7 Tombs Rd, Hyderabad",
+    phone: "903-233-2744",
+    email: "helpline@qmaks.com",
+    hours: "Monday - Friday: 9:00 AM - 5:00 PM",
     mapLocation: {
       lat: 40.7128,
-      lng: -74.0060
-    }
+      lng: -74.006,
+    },
   };
   
   constructor(
@@ -68,7 +64,7 @@ export class ContactComponent implements OnInit, AfterViewInit {
     // Check if Google Maps API is loaded
     if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
       const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY`;
+      script.src = `https://www.google.com/maps/place/Qmaks+Builders+%26+Developers/@17.4007974,78.4067673,17z/data=!3m1!4b1!4m6!3m5!1s0x3bcb97d79437cb77:0xf4830c9f927d2781!8m2!3d17.4007974!4d78.4067673!16s%2Fg%2F11qrfkpb6v?entry=ttu&g_ep=EgoyMDI1MDMzMC4wIKXMDSoASAFQAw%3D%3D`;
       script.async = true;
       script.defer = true;
       script.onload = () => this.loadMap();
