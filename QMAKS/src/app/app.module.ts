@@ -11,7 +11,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from "@angular/router";
 import { MatStepperModule } from "@angular/material/stepper";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
-import { NgChartsModule } from "ng2-charts"
+import { NgChartsModule } from "ng2-charts";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { DragDropModule } from "@angular/cdk/drag-drop";
 
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -54,6 +56,12 @@ import { SplashScreenComponent } from './splash-screen/splash-screen.component';
 import { HeroImagesComponent } from './dashboard/hero-images/hero-images.component';
 import { HeroImageFormDialogComponent } from './dashboard/hero-images/hero-image-form-dialog/hero-image-form-dialog.component'
 import { ConfirmDialogComponent } from "./dashboard/hero-images/hero-image-form-dialog/confirm-dialog.component";
+import { FeaturedPropertiesComponent } from './dashboard/featured-properties/featured-properties.component';
+import { PropertyFormDialogComponent } from './dashboard/featured-properties/property-form-dialog/property-form-dialog.component';
+import { BrochureUploadDialogComponent } from './dashboard/featured-properties/brochure-upload-dialog/brochure-upload-dialog.component';
+import { ProjectsManagementComponent } from './projects-management/projects-management/projects-management.component';
+import { ProjectFormDialogComponent } from './projects-management/project-form-dialog/project-form-dialog.component';
+import { ProjectMediaDialogComponent } from './projects-management/project-media-dialog/project-media-dialog.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +81,13 @@ import { ConfirmDialogComponent } from "./dashboard/hero-images/hero-image-form-
     SplashScreenComponent,
     HeroImagesComponent,
     HeroImageFormDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    FeaturedPropertiesComponent,
+    PropertyFormDialogComponent,
+    BrochureUploadDialogComponent,
+    ProjectsManagementComponent,
+    ProjectFormDialogComponent,
+    ProjectMediaDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -108,6 +122,8 @@ import { ConfirmDialogComponent } from "./dashboard/hero-images/hero-image-form-
     MatListModule,
     NgChartsModule,
     MatTableModule,
+    MatSlideToggleModule,
+    DragDropModule
 
     
     

@@ -1,9 +1,10 @@
 import { Component,  OnInit } from "@angular/core"
-import  { MatDialog } from "@angular/material/dialog"
+import { MatDialog } from "@angular/material/dialog"
 import  { MatSnackBar } from "@angular/material/snack-bar"
 import { HeroImageService } from "../../services/hero-image.service"
 import { HeroImageFormDialogComponent } from "./hero-image-form-dialog/hero-image-form-dialog.component"
 import { ConfirmDialogComponent } from "./hero-image-form-dialog/confirm-dialog.component"
+
 @Component({
   selector: 'app-hero-images',
   templateUrl: './hero-images.component.html',
@@ -53,15 +54,15 @@ export class HeroImagesComponent implements OnInit {
         this.isLoading = true
         this.heroImageService.addHeroImage(result).subscribe({
           next: () => {
-            this.loadHeroImages()
-            this.snackBar.open("Hero image added successfully", "Close", {
+            this.loadHeroImages();
+            this.snackBar.open("Hero image added successfully", "Close", { // Static message
               duration: 3000,
               panelClass: "success-snackbar",
-            })
+            });
           },
           error: (error) => {
             console.error("Error adding hero image", error)
-            this.snackBar.open("Error adding hero image", "Close", {
+            this.snackBar.open("Error adding hero image: " + (error.error?.message || "Unknown error"), "Close", {
               duration: 3000,
               panelClass: "error-snackbar",
             })
@@ -91,7 +92,7 @@ export class HeroImagesComponent implements OnInit {
           },
           error: (error) => {
             console.error("Error updating hero image", error)
-            this.snackBar.open("Error updating hero image", "Close", {
+            this.snackBar.open("Error updating hero image: " + (error.error?.message || "Unknown error"), "Close", {
               duration: 3000,
               panelClass: "error-snackbar",
             })
@@ -126,7 +127,7 @@ export class HeroImagesComponent implements OnInit {
           },
           error: (error) => {
             console.error("Error deleting hero image", error)
-            this.snackBar.open("Error deleting hero image", "Close", {
+            this.snackBar.open("Error deleting hero image: " + (error.error?.message || "Unknown error"), "Close", {
               duration: 3000,
               panelClass: "error-snackbar",
             })
@@ -138,8 +139,14 @@ export class HeroImagesComponent implements OnInit {
   }
 
   updateDisplayOrder(heroImage: any, newOrder: number): void {
+    const formData = new FormData()
+    formData.append("title", heroImage.title || "")
+    formData.append("subtitle", heroImage.subtitle || "")
+    formData.append("description", heroImage.description || "")
+    formData.append("displayOrder", newOrder.toString())
+
     this.isLoading = true
-    this.heroImageService.updateHeroImage(heroImage.id, { ...heroImage, displayOrder: newOrder }).subscribe({
+    this.heroImageService.updateHeroImage(heroImage.id, formData).subscribe({
       next: () => {
         this.loadHeroImages()
         this.snackBar.open("Display order updated successfully", "Close", {
@@ -149,7 +156,7 @@ export class HeroImagesComponent implements OnInit {
       },
       error: (error) => {
         console.error("Error updating display order", error)
-        this.snackBar.open("Error updating display order", "Close", {
+        this.snackBar.open("Error updating display order: " + (error.error?.message || "Unknown error"), "Close", {
           duration: 3000,
           panelClass: "error-snackbar",
         })
@@ -159,7 +166,6 @@ export class HeroImagesComponent implements OnInit {
   }
 
   previewHeroImage(heroImage: any): void {
-    // Open a dialog or navigate to a preview page
     window.open(heroImage.imagePath, "_blank")
   }
 }

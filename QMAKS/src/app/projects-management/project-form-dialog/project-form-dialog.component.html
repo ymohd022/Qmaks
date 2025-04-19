@@ -1,0 +1,228 @@
+<div class="dialog-container">
+    <h2 mat-dialog-title>{{formTitle}}</h2>
+    
+    <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+      <mat-dialog-content>
+        <div class="form-content">
+          <mat-tab-group animationDuration="300ms">
+            <!-- Basic Information Tab -->
+            <mat-tab label="Basic Information">
+              <div class="tab-content">
+                <!-- Image Upload -->
+                <div class="image-upload-container">
+                  <div class="image-preview" *ngIf="imagePreview">
+                    <img [src]="imagePreview" alt="Image Preview">
+                  </div>
+                  <div class="image-upload" *ngIf="!imagePreview">
+                    <mat-icon>cloud_upload</mat-icon>
+                    <p>Click to select a thumbnail image</p>
+                  </div>
+                  <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*" style="display: none;">
+                  <button type="button" mat-raised-button color="primary" (click)="fileInput.click()" class="upload-button">
+                    {{imagePreview ? 'Change Image' : 'Select Image'}}
+                  </button>
+                  <mat-error *ngIf="projectForm.get('image')?.invalid && projectForm.get('image')?.touched">
+                    Thumbnail image is required
+                  </mat-error>
+                </div>
+                
+                <!-- Basic Form Fields -->
+                <div class="form-fields">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Project Name</mat-label>
+                        <input matInput formControlName="name" placeholder="Enter project name">
+                        <mat-error *ngIf="projectForm.get('name')?.hasError('required')">
+                          Name is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Location</mat-label>
+                        <input matInput formControlName="location" placeholder="Enter project location">
+                        <mat-error *ngIf="projectForm.get('location')?.hasError('required')">
+                          Location is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col-md-4">
+                      <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Project Type</mat-label>
+                        <input matInput formControlName="type" placeholder="E.g., Residential Complex">
+                        <mat-error *ngIf="projectForm.get('type')?.hasError('required')">
+                          Project type is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    
+                    <div class="col-md-4">
+                      <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Status</mat-label>
+                        <mat-select formControlName="status">
+                          <mat-option *ngFor="let status of statusOptions" [value]="status">
+                            {{status}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="projectForm.get('status')?.hasError('required')">
+                          Status is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    
+                    <div class="col-md-4">
+                      <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Size</mat-label>
+                        <input matInput formControlName="size" placeholder="E.g., 25,000 sq.m">
+                        <mat-error *ngIf="projectForm.get('size')?.hasError('required')">
+                          Size is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Completion Date</mat-label>
+                        <input matInput formControlName="completion" placeholder="E.g., December 2025">
+                      </mat-form-field>
+                    </div>
+                    
+                    <div class="col-md-6">
+                      <div class="featured-toggle">
+                        <mat-slide-toggle formControlName="isFeatured" color="primary">
+                          Featured on Home Page
+                        </mat-slide-toggle>
+                        <span class="featured-hint">Display this project in the Featured Properties section</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Short Description</mat-label>
+                    <textarea matInput formControlName="description" placeholder="Enter a brief description (max 200 characters)" rows="2"></textarea>
+                    <mat-hint align="end">{{projectForm.get('description')?.value?.length || 0}}/200</mat-hint>
+                    <mat-error *ngIf="projectForm.get('description')?.hasError('required')">
+                      Description is required
+                    </mat-error>
+                    <mat-error *ngIf="projectForm.get('description')?.hasError('maxlength')">
+                      Description cannot exceed 200 characters
+                    </mat-error>
+                  </mat-form-field>
+                  
+                  <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Full Description</mat-label>
+                    <textarea matInput formControlName="fullDescription" placeholder="Enter detailed project description" rows="5"></textarea>
+                    <mat-error *ngIf="projectForm.get('fullDescription')?.hasError('required')">
+                      Full description is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-tab>
+            
+            <!-- Specifications Tab -->
+            <mat-tab label="Specifications">
+              <div class="tab-content">
+                <div class="specifications-container" formArrayName="specifications">
+                  <div class="specifications-header">
+                    <h3>Project Specifications</h3>
+                    <button type="button" mat-mini-fab color="primary" (click)="addSpecification()">
+                      <mat-icon>add</mat-icon>
+                    </button>
+                  </div>
+                  
+                  <div *ngFor="let spec of specificationsArray.controls; let i = index" [formGroupName]="i" class="specification-item">
+                    <div class="row">
+                      <div class="col-md-5">
+                        <mat-form-field appearance="outline" class="form-field">
+                          <mat-label>Specification</mat-label>
+                          <input matInput formControlName="key" placeholder="E.g., Construction Start">
+                          <mat-error *ngIf="specificationsArray.at(i).get('key')?.hasError('required')">
+                            Specification name is required
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      
+                      <div class="col-md-5">
+                        <mat-form-field appearance="outline" class="form-field">
+                          <mat-label>Value</mat-label>
+                          <input matInput formControlName="value" placeholder="E.g., January 2023">
+                          <mat-error *ngIf="specificationsArray.at(i).get('value')?.hasError('required')">
+                            Value is required
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      
+                      <div class="col-md-2">
+                        <button type="button" mat-icon-button color="warn" (click)="removeSpecification(i)" class="remove-btn">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div *ngIf="specificationsArray.length === 0" class="no-items-message">
+                    No specifications added. Click the + button to add specifications.
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+            
+            <!-- Features Tab -->
+            <mat-tab label="Features & Amenities">
+              <div class="tab-content">
+                <div class="features-container" formArrayName="features">
+                  <div class="features-header">
+                    <h3>Project Features</h3>
+                    <button type="button" mat-mini-fab color="primary" (click)="addFeature()">
+                      <mat-icon>add</mat-icon>
+                    </button>
+                  </div>
+                  
+                  <div *ngFor="let feature of featuresArray.controls; let i = index" class="feature-item">
+                    <div class="row">
+                      <div class="col-md-10">
+                        <mat-form-field appearance="outline" class="form-field">
+                          <mat-label>Feature</mat-label>
+                          <input matInput [formControlName]="i" placeholder="E.g., Swimming Pool and Jacuzzi">
+                          <mat-error *ngIf="featuresArray.at(i).hasError('required')">
+                            Feature is required
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      
+                      <div class="col-md-2">
+                        <button type="button" mat-icon-button color="warn" (click)="removeFeature(i)" class="remove-btn">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div *ngIf="featuresArray.length === 0" class="no-items-message">
+                    No features added. Click the + button to add features.
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </mat-dialog-content>
+      
+      <mat-dialog-actions align="end">
+        <button mat-button type="button" (click)="onCancel()" [disabled]="isLoading">Cancel</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="projectForm.invalid || isLoading">
+          <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
+          <span *ngIf="!isLoading">{{submitButtonText}}</span>
+        </button>
+      </mat-dialog-actions>
+    </form>
+  </div>
+  

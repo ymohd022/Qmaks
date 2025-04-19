@@ -29,6 +29,41 @@ const initDatabase = async () => {
     // Use the database
     await connection.query(`USE ${dbConfig.database}`)
 
+    // Create projects table if it doesn't exist
+    await connection.query(`
+      CREATE TABLE IF NOT EXISTS projects (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(100) NOT NULL,
+        location VARCHAR(100) NOT NULL,
+        type VARCHAR(100) NOT NULL,
+        status VARCHAR(20) NOT NULL,
+        size VARCHAR(50) NOT NULL,
+        completion VARCHAR(50),
+        description TEXT NOT NULL,
+        full_description TEXT NOT NULL,
+        is_featured BOOLEAN DEFAULT 0,
+        specifications TEXT,
+        features TEXT,
+        brochure_path VARCHAR(255),
+        brochure_title VARCHAR(100),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+      )
+    `)
+
+    // Create project_media table if it doesn't exist
+    await connection.query(`
+      CREATE TABLE IF NOT EXISTS project_media (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        project_id INT NOT NULL,
+        type ENUM('photo', 'floorPlan', 'render') NOT NULL,
+        path VARCHAR(255) NOT NULL,
+        display_order INT DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE
+      )
+    `)
+
     // Create hero_images table if it doesn't exist
     await connection.query(`
       CREATE TABLE IF NOT EXISTS hero_images (
@@ -38,6 +73,23 @@ const initDatabase = async () => {
         description TEXT,
         image_path VARCHAR(255) NOT NULL,
         display_order INT DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `)
+
+    // Create featured_properties table if it doesn't exist
+    await connection.query(`
+      CREATE TABLE IF NOT EXISTS featured_properties (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(100) NOT NULL,
+        location VARCHAR(100) NOT NULL,
+        type VARCHAR(100) NOT NULL,
+        status VARCHAR(20) NOT NULL,
+        completion VARCHAR(50),
+        description TEXT NOT NULL,
+        image_path VARCHAR(255) NOT NULL,
+        brochure_path VARCHAR(255),
+        brochure_title VARCHAR(100),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `)
@@ -53,4 +105,3 @@ const initDatabase = async () => {
 initDatabase()
 
 module.exports = pool
-

@@ -1,0 +1,119 @@
+<div class="dialog-container">
+    <h2 mat-dialog-title>{{formTitle}}</h2>
+    
+    <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()">
+      <mat-dialog-content>
+        <div class="form-content">
+          <!-- Image Upload -->
+          <div class="image-upload-container">
+            <div class="image-preview" *ngIf="imagePreview">
+              <img [src]="imagePreview" alt="Image Preview">
+            </div>
+            <div class="image-upload" *ngIf="!imagePreview">
+              <mat-icon>cloud_upload</mat-icon>
+              <p>Click to select an image</p>
+            </div>
+            <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*" style="display: none;">
+            <button type="button" mat-raised-button color="primary" (click)="fileInput.click()" class="upload-button">
+              {{imagePreview ? 'Change Image' : 'Select Image'}}
+            </button>
+            <mat-error *ngIf="propertyForm.get('image')?.invalid && propertyForm.get('image')?.touched">
+              Image is required
+            </mat-error>
+          </div>
+          
+          <!-- Form Fields -->
+          <div class="form-fields">
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field appearance="outline" class="form-field">
+                  <mat-label>Property Name</mat-label>
+                  <input matInput formControlName="name" placeholder="Enter property name">
+                  <mat-error *ngIf="propertyForm.get('name')?.hasError('required')">
+                    Name is required
+                  </mat-error>
+                  <mat-error *ngIf="propertyForm.get('name')?.hasError('maxlength')">
+                    Name cannot exceed 100 characters
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              
+              <div class="col-md-6">
+                <mat-form-field appearance="outline" class="form-field">
+                  <mat-label>Location</mat-label>
+                  <input matInput formControlName="location" placeholder="Enter property location">
+                  <mat-error *ngIf="propertyForm.get('location')?.hasError('required')">
+                    Location is required
+                  </mat-error>
+                  <mat-error *ngIf="propertyForm.get('location')?.hasError('maxlength')">
+                    Location cannot exceed 100 characters
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field appearance="outline" class="form-field">
+                  <mat-label>Property Type</mat-label>
+                  <input matInput formControlName="type" placeholder="E.g., Luxury Apartments">
+                  <mat-error *ngIf="propertyForm.get('type')?.hasError('required')">
+                    Property type is required
+                  </mat-error>
+                  <mat-error *ngIf="propertyForm.get('type')?.hasError('maxlength')">
+                    Property type cannot exceed 100 characters
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              
+              <div class="col-md-6">
+                <mat-form-field appearance="outline" class="form-field">
+                  <mat-label>Status</mat-label>
+                  <mat-select formControlName="status">
+                    <mat-option *ngFor="let status of statusOptions" [value]="status">
+                      {{status}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="propertyForm.get('status')?.hasError('required')">
+                    Status is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field appearance="outline" class="form-field">
+                  <mat-label>Completion Date</mat-label>
+                  <input matInput formControlName="completion" placeholder="E.g., Dec 2023">
+                  <mat-error *ngIf="propertyForm.get('completion')?.hasError('maxlength')">
+                    Completion date cannot exceed 50 characters
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Description</mat-label>
+              <textarea matInput formControlName="description" placeholder="Enter property description" rows="4"></textarea>
+              <mat-error *ngIf="propertyForm.get('description')?.hasError('required')">
+                Description is required
+              </mat-error>
+              <mat-error *ngIf="propertyForm.get('description')?.hasError('maxlength')">
+                Description cannot exceed 500 characters
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-dialog-content>
+      
+      <mat-dialog-actions align="end">
+        <button mat-button type="button" (click)="onCancel()" [disabled]="isLoading">Cancel</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="propertyForm.invalid || isLoading">
+          <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
+          <span *ngIf="!isLoading">{{submitButtonText}}</span>
+        </button>
+      </mat-dialog-actions>
+    </form>
+  </div>
+  

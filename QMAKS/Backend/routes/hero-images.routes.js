@@ -35,7 +35,7 @@ const upload = multer({
 })
 
 // Get all hero images
-router.get("/", authenticateToken, async (req, res) => {
+router.get("/",  async (req, res) => {
   try {
     const [heroImages] = await pool.query("SELECT * FROM hero_images ORDER BY display_order ASC")
 
@@ -57,7 +57,7 @@ router.get("/", authenticateToken, async (req, res) => {
 })
 
 // Get a single hero image by ID
-router.get("/:id", authenticateToken, async (req, res) => {
+router.get("/:id",  async (req, res) => {
   try {
     const [heroImages] = await pool.query("SELECT * FROM hero_images WHERE id = ?", [req.params.id])
 
@@ -83,7 +83,7 @@ router.get("/:id", authenticateToken, async (req, res) => {
 })
 
 // Add a new hero image
-router.post("/", authenticateToken, upload.single("image"), async (req, res) => {
+router.post("/",  upload.single("image"), async (req, res) => {
   try {
     const { title, subtitle, description, displayOrder } = req.body
 
@@ -92,7 +92,8 @@ router.post("/", authenticateToken, upload.single("image"), async (req, res) => 
     }
 
     // Get the relative path to the uploaded file
-    const imagePath = req.file.path.replace(/\\/g, "/").replace("server/", "")
+    // const imagePath = req.file.path.replace(/\\/g, "/").replace("server/", "")
+    const imagePath = path.relative(path.join(__dirname, '../'), req.file.path).replace(/\\/g, '/');
 
     // Insert hero image
     const [result] = await pool.query(
@@ -124,7 +125,7 @@ router.post("/", authenticateToken, upload.single("image"), async (req, res) => 
 })
 
 // Update a hero image
-router.put("/:id", authenticateToken, upload.single("image"), async (req, res) => {
+router.put("/:id",  upload.single("image"), async (req, res) => {
   try {
     const { title, subtitle, description, displayOrder } = req.body
     const heroImageId = req.params.id
@@ -190,7 +191,7 @@ router.put("/:id", authenticateToken, upload.single("image"), async (req, res) =
 })
 
 // Delete a hero image
-router.delete("/:id", authenticateToken, async (req, res) => {
+router.delete("/:id",  async (req, res) => {
   try {
     const heroImageId = req.params.id
 

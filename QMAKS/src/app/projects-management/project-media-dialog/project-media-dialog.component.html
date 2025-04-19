@@ -1,0 +1,141 @@
+<div class="dialog-container">
+  <h2 mat-dialog-title>Manage Project Media: {{data.project.name}}</h2>
+  
+  <mat-dialog-content>
+    <div class="media-content">
+      <!-- Loading Spinner -->
+      <div *ngIf="isLoading" class="loading-container">
+        <mat-spinner diameter="40"></mat-spinner>
+        <p>Loading project media...</p>
+      </div>
+      
+      <div *ngIf="!isLoading">
+        <mat-tab-group [(selectedIndex)]="selectedIndex" 
+                      (selectedIndexChange)="onTabChange($event)"
+                      animationDuration="300ms">
+          <!-- Photos Tab -->
+          <mat-tab label="Photos">
+            <div class="tab-content">
+              <div class="upload-section">
+                <input type="file" #photoInput (change)="onFileSelected($event, 'photo')" accept="image/*" multiple style="display: none;">
+                <button mat-raised-button color="primary" [disabled]="uploadingMedia" (click)="photoInput.click()">
+                  <mat-icon>add_photo_alternate</mat-icon>
+                  Upload Photos
+                </button>
+                <p class="upload-hint">Drag and drop to reorder photos. First photo will be used as the main project image.</p>
+              </div>
+              
+              <div *ngIf="uploadingMedia" class="uploading-indicator">
+                <mat-spinner diameter="20"></mat-spinner>
+                <span>Uploading media...</span>
+              </div>
+              
+              <div cdkDropList (cdkDropListDropped)="onDrop($event, 'photo')" class="media-grid">
+                <div *ngFor="let media of photos" cdkDrag class="media-item">
+                  <div class="media-preview">
+                    <img [src]="media.path" [alt]="'Project photo ' + media.id">
+                    <div class="media-overlay">
+                      <button mat-icon-button color="warn" (click)="deleteMedia(media)" matTooltip="Delete">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                      <div class="drag-handle" cdkDragHandle matTooltip="Drag to reorder">
+                        <mat-icon>drag_indicator</mat-icon>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div *ngIf="photos.length === 0" class="no-media-message">
+                  No photos uploaded yet. Click the button above to upload photos.
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          
+          <!-- Floor Plans Tab -->
+          <mat-tab label="Floor Plans">
+            <div class="tab-content">
+              <div class="upload-section">
+                <input type="file" #floorPlanInput (change)="onFileSelected($event, 'floorPlan')" accept="image/*" multiple style="display: none;">
+                <button mat-raised-button color="primary" [disabled]="uploadingMedia" (click)="floorPlanInput.click()">
+                  <mat-icon>add_photo_alternate</mat-icon>
+                  Upload Floor Plans
+                </button>
+                <p class="upload-hint">Drag and drop to reorder floor plans.</p>
+              </div>
+              
+              <div *ngIf="uploadingMedia" class="uploading-indicator">
+                <mat-spinner diameter="20"></mat-spinner>
+                <span>Uploading media...</span>
+              </div>
+              
+              <div cdkDropList (cdkDropListDropped)="onDrop($event, 'floorPlan')" class="media-grid">
+                <div *ngFor="let media of floorPlans" cdkDrag class="media-item">
+                  <div class="media-preview">
+                    <img [src]="media.path" [alt]="'Project floor plan ' + media.id">
+                    <div class="media-overlay">
+                      <button mat-icon-button color="warn" (click)="deleteMedia(media)" matTooltip="Delete">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                      <div class="drag-handle" cdkDragHandle matTooltip="Drag to reorder">
+                        <mat-icon>drag_indicator</mat-icon>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div *ngIf="floorPlans.length === 0" class="no-media-message">
+                  No floor plans uploaded yet. Click the button above to upload floor plans.
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          
+          <!-- Architectural Renders Tab -->
+          <mat-tab label="Architectural Renders">
+            <div class="tab-content">
+              <div class="upload-section">
+                <input type="file" #renderInput (change)="onFileSelected($event, 'render')" accept="image/*" multiple style="display: none;">
+                <button mat-raised-button color="primary" [disabled]="uploadingMedia" (click)="renderInput.click()">
+                  <mat-icon>add_photo_alternate</mat-icon>
+                  Upload Renders
+                </button>
+                <p class="upload-hint">Drag and drop to reorder architectural renders.</p>
+              </div>
+              
+              <div *ngIf="uploadingMedia" class="uploading-indicator">
+                <mat-spinner diameter="20"></mat-spinner>
+                <span>Uploading media...</span>
+              </div>
+              
+              <div cdkDropList (cdkDropListDropped)="onDrop($event, 'render')" class="media-grid">
+                <div *ngFor="let media of renders" cdkDrag class="media-item">
+                  <div class="media-preview">
+                    <img [src]="media.path" [alt]="'Project render ' + media.id">
+                    <div class="media-overlay">
+                      <button mat-icon-button color="warn" (click)="deleteMedia(media)" matTooltip="Delete">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                      <div class="drag-handle" cdkDragHandle matTooltip="Drag to reorder">
+                        <mat-icon>drag_indicator</mat-icon>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div *ngIf="renders.length === 0" class="no-media-message">
+                  No architectural renders uploaded yet. Click the button above to upload renders.
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </mat-dialog-content>
+  
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="close(true)">Done</button>
+  </mat-dialog-actions>
+</div>

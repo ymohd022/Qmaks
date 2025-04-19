@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core"
+import { Component,  OnInit } from "@angular/core"
 import  { ActivatedRoute } from "@angular/router"
 import {  FormBuilder,  FormGroup, Validators } from "@angular/forms"
 import  { MatSnackBar } from "@angular/material/snack-bar"
@@ -46,6 +46,28 @@ export class ProjectDetailComponent implements OnInit {
     this.projectService.getProject(id).subscribe(
       (project: Project) => {
         this.project = project
+
+        // Ensure compatibility with the template
+        if (!this.project.gallery) {
+          this.project.gallery = []
+        }
+        if (!this.project.floorPlans) {
+          this.project.floorPlans = []
+        }
+        if (!this.project.architecturalRenders) {
+          this.project.architecturalRenders = []
+        }
+
+        // Map name to title for compatibility
+        if (this.project.name && !this.project.title) {
+          this.project.title = this.project.name
+        }
+
+        // Map brochurePath to brochureUrl for compatibility
+        if (this.project.brochurePath && !this.project.brochureUrl) {
+          this.project.brochureUrl = this.project.brochurePath
+        }
+
         this.loading = false
       },
       (error) => {
@@ -60,8 +82,8 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   downloadBrochure(): void {
-    if (this.project && this.project.brochureUrl) {
-      window.open(this.project.brochureUrl, "_blank")
+    if (this.project && (this.project.brochureUrl || this.project.brochurePath)) {
+      window.open(this.project.brochureUrl || this.project.brochurePath, "_blank")
     }
   }
 
@@ -73,7 +95,7 @@ export class ProjectDetailComponent implements OnInit {
       const formData = {
         ...this.inquiryForm.value,
         projectId: this.project?.id,
-        projectName: this.project?.title,
+        projectName: this.project?.title || this.project?.name,
       }
 
       // Simulate API call
@@ -95,4 +117,3 @@ export class ProjectDetailComponent implements OnInit {
     }
   }
 }
-

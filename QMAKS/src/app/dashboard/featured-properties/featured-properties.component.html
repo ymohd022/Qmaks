@@ -1,0 +1,173 @@
+<div class="properties-container">
+    <div class="page-header">
+      <div class="header-content">
+        <h1 class="page-title">Featured Properties Management</h1>
+        <p class="page-subtitle">Manage featured properties for the home page</p>
+      </div>
+      <button mat-raised-button color="primary" (click)="openAddDialog()" class="add-button">
+        <mat-icon>add</mat-icon>
+        Add Property
+      </button>
+    </div>
+    
+    <!-- Loading Spinner -->
+    <div class="loading-container" *ngIf="isLoading">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>Loading properties...</p>
+    </div>
+    
+    <!-- Properties Content -->
+    <div class="properties-content" *ngIf="!isLoading">
+      <div class="properties-preview">
+        <h2 class="section-title">Current Featured Properties</h2>
+        
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+          <button mat-button *ngFor="let filter of statusFilters" 
+                  [class.active]="selectedFilter === filter"
+                  (click)="setFilter(filter)">
+            {{filter}}
+          </button>
+        </div>
+        
+        <div class="preview-container" *ngIf="properties.length > 0">
+          <div class="preview-grid">
+            <div class="property-card" *ngFor="let property of filterProperties()">
+              <div class="property-image" [style.background-image]="'url(' + property.imagePath + ')'">
+                <div class="property-status" [ngClass]="property.status.toLowerCase()">
+                  {{property.status}}
+                </div>
+              </div>
+              <div class="property-content">
+                <h3 class="property-title">{{property.name}}</h3>
+                <div class="property-meta">
+                  <span class="location">
+                    <mat-icon>location_on</mat-icon> {{property.location}}
+                  </span>
+                  <span class="type">
+                    <mat-icon>home</mat-icon> {{property.type}}
+                  </span>
+                </div>
+                <p class="property-description">{{property.description}}</p>
+                <div class="property-completion" *ngIf="property.status !== 'Completed'">
+                  <span>Completion: {{property.completion}}</span>
+                </div>
+                <div class="property-actions">
+                  <button mat-icon-button color="primary" matTooltip="Edit" (click)="openEditDialog(property)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button mat-icon-button color="accent" matTooltip="Upload Brochure" (click)="openBrochureUploadDialog(property)">
+                    <mat-icon>upload_file</mat-icon>
+                  </button>
+                  <button mat-icon-button color="warn" matTooltip="Delete" (click)="openDeleteDialog(property)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="no-properties" *ngIf="properties.length === 0">
+          <mat-icon>business</mat-icon>
+          <p>No featured properties found</p>
+          <button mat-raised-button color="primary" (click)="openAddDialog()">
+            Add Your First Property
+          </button>
+        </div>
+      </div>
+      
+      <div class="properties-table">
+        <h2 class="section-title">Manage Featured Properties</h2>
+        <div class="table-container mat-elevation-z2">
+          <table mat-table [dataSource]="properties" class="properties-table">
+            <!-- Image Column -->
+            <ng-container matColumnDef="image">
+              <th mat-header-cell *matHeaderCellDef>Image</th>
+              <td mat-cell *matCellDef="let property">
+                <div class="table-image" [style.background-image]="'url(' + property.imagePath + ')'"></div>
+              </td>
+            </ng-container>
+            
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Name</th>
+              <td mat-cell *matCellDef="let property">{{property.name}}</td>
+            </ng-container>
+            
+            <!-- Location Column -->
+            <ng-container matColumnDef="location">
+              <th mat-header-cell *matHeaderCellDef>Location</th>
+              <td mat-cell *matCellDef="let property">{{property.location}}</td>
+            </ng-container>
+            
+            <!-- Type Column -->
+            <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef>Type</th>
+              <td mat-cell *matCellDef="let property">{{property.type}}</td>
+            </ng-container>
+            
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let property">
+                <span class="status-badge" [ngClass]="property.status.toLowerCase()">
+                  {{property.status}}
+                </span>
+              </td>
+            </ng-container>
+            
+            <!-- Completion Column -->
+            <ng-container matColumnDef="completion">
+              <th mat-header-cell *matHeaderCellDef>Completion</th>
+              <td mat-cell *matCellDef="let property">{{property.completion || 'N/A'}}</td>
+            </ng-container>
+            
+            <!-- Brochure Column -->
+            <ng-container matColumnDef="brochure">
+              <th mat-header-cell *matHeaderCellDef>Brochure</th>
+              <td mat-cell *matCellDef="let property">
+                <button mat-icon-button color="primary" 
+                        [disabled]="!property.brochurePath"
+                        (click)="downloadBrochure(property)"
+                        matTooltip="Download Brochure">
+                  <mat-icon>download</mat-icon>
+                </button>
+                <button mat-icon-button color="accent" 
+                        (click)="openBrochureUploadDialog(property)"
+                        matTooltip="Upload Brochure">
+                  <mat-icon>upload_file</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+            
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let property">
+                <div class="action-buttons">
+                  <button mat-icon-button color="primary" matTooltip="Preview" (click)="previewProperty(property)">
+                    <mat-icon>visibility</mat-icon>
+                  </button>
+                  <button mat-icon-button color="accent" matTooltip="Edit" (click)="openEditDialog(property)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button mat-icon-button color="warn" matTooltip="Delete" (click)="openDeleteDialog(property)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+            
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          
+          <div class="no-data-message" *ngIf="properties.length === 0">
+            <p>No featured properties found. Click "Add Property" to create your first property.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

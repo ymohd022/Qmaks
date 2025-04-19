@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, style, animate, state } from '@angular/animations';
+import { HeroImageService } from '../services/hero-image.service';
+import { FeaturedPropertyService } from '../services/featured-property.service';
 
 @Component({
   selector: 'app-home',
@@ -39,27 +41,8 @@ import { trigger, transition, style, animate, state } from '@angular/animations'
   ]
 })
 export class HomeComponent implements OnInit {
-  // Hero slider images
-  heroSlides = [
-    {
-      image: 'banners-1.jpg',
-      title: 'Happiness for Lifetime',
-      subtitle: 'And Luxurious Living',
-      description: 'Discover premium properties designed for modern living'
-    },
-    {
-      image: 'banners-2.jpg',
-      title: 'Elegant Designs',
-      subtitle: 'For Modern Families',
-      description: 'Thoughtfully crafted spaces that elevate your lifestyle'
-    },
-    {
-      image: 'banners-3.jpg',
-      title: 'Prime Locations',
-      subtitle: 'Exceptional Value',
-      description: 'Strategic properties in the most sought-after neighborhoods'
-    }
-  ];
+  heroSlides: any[] = [];
+  featuredProjects: any[] = [];
   
   // Stats
   stats = [
@@ -69,49 +52,7 @@ export class HomeComponent implements OnInit {
     { icon: 'engineering', value: 25, label: 'Years Experience', suffix: '+' }
   ];
   
-  // Featured projects
-  featuredProjects = [
-    {
-      id: 1,
-      name: 'Royal Heights',
-      location: 'Downtown',
-      type: 'Luxury Apartments',
-      status: 'Ongoing',
-      completion: 'Dec 2023',
-      image: '/mk.png',
-      description: 'Premium 3 & 4 BHK apartments with world-class amenities in the heart of the city.'
-    },
-    {
-      id: 2,
-      name: 'Green Valley Villas',
-      location: 'Suburban Area',
-      type: 'Premium Villas',
-      status: 'Completed',
-      completion: 'Completed',
-      image: '/cm.jpg',
-      description: 'Eco-friendly villas with spacious gardens and sustainable features.'
-    },
-    {
-      id: 3,
-      name: 'Skyline Towers',
-      location: 'Business District',
-      type: 'High-rise Apartments',
-      status: 'Ongoing',
-      completion: 'Mar 2024',
-      image: '/main.jpg',
-      description: 'Modern apartments with panoramic city views and smart home technology.'
-    },
-    {
-      id: 4,
-      name: 'Riverside Residences',
-      location: 'Waterfront',
-      type: 'Luxury Condos',
-      status: 'Upcoming',
-      completion: 'Jun 2024',
-      image: '/platina.png',
-      description: 'Exclusive waterfront condos with private balconies and premium finishes.'
-    }
-  ];
+ 
   
   // Testimonials
   testimonials = [
@@ -163,9 +104,15 @@ export class HomeComponent implements OnInit {
   // Animation states
   statsAnimated = false;
   
-  constructor() { }
+  constructor(
+    private heroImageService: HeroImageService,
+    private featuredPropertyService: FeaturedPropertyService
+  ) { }
   
   ngOnInit(): void {
+    this.loadHeroImages();
+    this.loadFeaturedProperties();
+
     // Auto-rotate hero slider
     setInterval(() => {
       this.nextSlide();
@@ -173,6 +120,33 @@ export class HomeComponent implements OnInit {
     
     // Observe stats section for animation
     this.observeStats();
+  }
+
+  private loadHeroImages(): void {
+    this.heroImageService.getHeroImages().subscribe({
+      next: (images) => {
+        this.heroSlides = images.map(img => ({
+          image: img.imagePath,
+          title: img.title,
+          subtitle: img.subtitle,
+          description: img.description
+        }));
+      },
+      error: (error) => console.error('Error loading hero images:', error)
+    });
+  }
+
+  private loadFeaturedProperties(): void {
+    this.featuredPropertyService.getFeaturedProperties().subscribe({
+      next: (properties) => {
+        this.featuredProjects = properties.map(prop => ({
+          ...prop,
+          image: prop.imagePath,
+          brochure: prop.brochurePath
+        }));
+      },
+      error: (error) => console.error('Error loading properties:', error)
+    });
   }
   
   // Hero slider navigation
@@ -216,9 +190,20 @@ export class HomeComponent implements OnInit {
   
   // Download brochure
   downloadBrochure(projectId: number): void {
-    // In a real app, this would trigger a download
-    console.log(`Downloading brochure for project ${projectId}`);
-    alert(`Brochure download started for project ${projectId}`);
+    this.featuredPropertyService.getFeaturedProperty(projectId).subscribe({
+      next: (property) => {
+        if (property.brochurePath) {
+          const downloadUrl = `${this.featuredPropertyService.getApiUrl()}/${projectId}/brochure`;
+          window.open(downloadUrl, '_blank');
+        } else {
+          alert('No brochure available for this project.');
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching brochure:', error);
+        alert('Error fetching brochure. Please try again later.');
+      }
+    });
   }
   
   // Enquire now

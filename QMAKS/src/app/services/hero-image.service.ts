@@ -6,7 +6,7 @@ import  { Observable } from "rxjs"
   providedIn: "root",
 })
 export class HeroImageService {
-  private apiUrl = `http://localhost:3000/home/hero-images`
+  private apiUrl = `http://localhost:3000/api/home/hero-images`
 
   constructor(private http: HttpClient) {}
 
@@ -30,4 +30,3 @@ export class HeroImageService {
     return this.http.delete<any>(`${this.apiUrl}/${id}`)
   }
 }
-

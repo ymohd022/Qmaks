@@ -11,6 +11,8 @@ import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
 import { HeroImagesComponent } from './dashboard/hero-images/hero-images.component';
+import { FeaturedPropertiesComponent } from './dashboard/featured-properties/featured-properties.component';
+import { ProjectsManagementComponent } from './projects-management/projects-management/projects-management.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -28,6 +30,8 @@ const routes: Routes = [
     children: [
       { path: "dashboard", component: DashboardComponent },
       { path: "home/hero-images", component: HeroImagesComponent },
+      { path: "home/featured-properties", component: FeaturedPropertiesComponent },
+      { path: "projects/details", component: ProjectsManagementComponent },
       // Add other admin routes here
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
     ],
