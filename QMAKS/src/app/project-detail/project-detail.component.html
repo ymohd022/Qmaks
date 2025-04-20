@@ -12,7 +12,7 @@
         <div class="container">
           <div class="row">
             <div class="col-md-8">
-              <h1 class="project-title">{{project.title}}</h1>
+              <h1 class="project-title">{{project.name}}</h1>
               <div class="project-meta">
                 <div class="meta-item">
                   <mat-icon>location_on</mat-icon>
@@ -29,7 +29,8 @@
               </div>
             </div>
             <div class="col-md-4 text-md-end">
-              <button mat-raised-button color="accent" class="download-btn" (click)="downloadBrochure()">
+              <button mat-raised-button color="accent" class="download-btn" (click)="downloadBrochure()" 
+                      [disabled]="!project.brochureUrl && !project.brochurePath">
                 <mat-icon>download</mat-icon> Download Brochure
               </button>
             </div>
@@ -51,13 +52,16 @@
                         <div class="row g-3 mt-2">
                           <div *ngFor="let photo of project.gallery" class="col-md-4 col-sm-6">
                             <div class="gallery-item">
-                              <img [src]="photo" [alt]="project.title + ' photo'" class="img-fluid">
+                              <img [src]="photo" [alt]="project.name + ' photo'" class="img-fluid">
                               <div class="gallery-overlay">
                                 <button mat-icon-button>
                                   <mat-icon>zoom_in</mat-icon>
                                 </button>
                               </div>
                             </div>
+                          </div>
+                          <div *ngIf="project.gallery?.length === 0" class="col-12 text-center py-4">
+                            <p>No photos available for this project.</p>
                           </div>
                         </div>
                       </div>
@@ -67,13 +71,16 @@
                         <div class="row g-3 mt-2">
                           <div *ngFor="let plan of project.floorPlans" class="col-md-4 col-sm-6">
                             <div class="gallery-item">
-                              <img [src]="plan" [alt]="project.title + ' floor plan'" class="img-fluid">
+                              <img [src]="plan" [alt]="project.name + ' floor plan'" class="img-fluid">
                               <div class="gallery-overlay">
                                 <button mat-icon-button>
                                   <mat-icon>zoom_in</mat-icon>
                                 </button>
                               </div>
                             </div>
+                          </div>
+                          <div *ngIf="project.floorPlans?.length === 0" class="col-12 text-center py-4">
+                            <p>No floor plans available for this project.</p>
                           </div>
                         </div>
                       </div>
@@ -83,13 +90,16 @@
                         <div class="row g-3 mt-2">
                           <div *ngFor="let render of project.architecturalRenders" class="col-md-4 col-sm-6">
                             <div class="gallery-item">
-                              <img [src]="render" [alt]="project.title + ' render'" class="img-fluid">
+                              <img [src]="render" [alt]="project.name + ' render'" class="img-fluid">
                               <div class="gallery-overlay">
                                 <button mat-icon-button>
                                   <mat-icon>zoom_in</mat-icon>
                                 </button>
                               </div>
                             </div>
+                          </div>
+                          <div *ngIf="project.architecturalRenders?.length === 0" class="col-12 text-center py-4">
+                            <p>No architectural renders available for this project.</p>
                           </div>
                         </div>
                       </div>
@@ -135,6 +145,9 @@
                       <div class="spec-label">{{spec.key}}</div>
                       <div class="spec-value">{{spec.value}}</div>
                     </div>
+                    <div *ngIf="!project.specifications || (project.specifications | keyvalue)?.length === 0" class="text-center py-3">
+                      <p>No specifications available for this project.</p>
+                    </div>
                   </div>
                 </mat-card-content>
               </mat-card>
@@ -149,6 +162,9 @@
                     <div *ngFor="let feature of project.features" class="feature-item">
                       <mat-icon>check_circle</mat-icon>
                       <span>{{feature}}</span>
+                    </div>
+                    <div *ngIf="!project.features || project.features.length === 0" class="text-center py-3">
+                      <p>No features available for this project.</p>
                     </div>
                   </div>
                 </mat-card-content>
@@ -280,4 +296,3 @@
     </div>
   </div>
   <app-footer></app-footer>
-  

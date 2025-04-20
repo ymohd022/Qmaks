@@ -41,7 +41,7 @@ export class AdminLayoutComponent implements OnInit {
       expanded: false,
       children: [
         { name: "Project Details", route: "/admin/projects/details", icon: "description" },
-        { name: "Project Media", route: "/admin/projects/media", icon: "perm_media" },
+        // { name: "Project Media", route: "/admin/projects/media", icon: "perm_media" },
       ],
     },
     {
@@ -51,13 +51,13 @@ export class AdminLayoutComponent implements OnInit {
       expanded: false,
       children: [],
     },
-    {
-      name: "Brochure Management",
-      icon: "picture_as_pdf",
-      route: "/admin/brochures",
-      expanded: false,
-      children: [],
-    },
+    // {
+    //   name: "Brochure Management",
+    //   icon: "picture_as_pdf",
+    //   route: "/admin/brochures",
+    //   expanded: false,
+    //   children: [],
+    // },
   ];
 
   currentUser: any = null;

@@ -102,12 +102,7 @@ router.post("/",  upload.single("image"), async (req, res) => {
     )
 
     // Log activity
-    await pool.query("INSERT INTO activities (user_id, type, item, timestamp) VALUES (?, ?, ?, NOW())", [
-      req.user.id,
-      "upload",
-      "New hero image",
-      new Date(),
-    ])
+   
 
     // Get the newly created hero image
     const [heroImages] = await pool.query("SELECT * FROM hero_images WHERE id = ?", [result.insertId])
@@ -155,7 +150,9 @@ router.put("/:id",  upload.single("image"), async (req, res) => {
       }
 
       // Get the relative path to the new uploaded file
-      imagePath = req.file.path.replace(/\\/g, "/").replace("server/", "")
+      const imagePath = path.relative(path.join(__dirname, '../'), req.file.path)
+  .replace(/\\/g, '/')
+  .replace('server/', '');
       updateQuery += ", image_path = ?"
       queryParams.push(imagePath)
     }
@@ -168,12 +165,7 @@ router.put("/:id",  upload.single("image"), async (req, res) => {
     await pool.query(updateQuery, queryParams)
 
     // Log activity
-    await pool.query("INSERT INTO activities (user_id, type, item, timestamp) VALUES (?, ?, ?, NOW())", [
-      req.user.id,
-      "edit",
-      `Hero image: ${title}`,
-      new Date(),
-    ])
+   
 
     // Get the updated hero image
     const [updatedImages] = await pool.query("SELECT * FROM hero_images WHERE id = ?", [heroImageId])
@@ -216,12 +208,7 @@ router.delete("/:id",  async (req, res) => {
     await pool.query("DELETE FROM hero_images WHERE id = ?", [heroImageId])
 
     // Log activity
-    await pool.query("INSERT INTO activities (user_id, type, item, timestamp) VALUES (?, ?, ?, NOW())", [
-      req.user.id,
-      "delete",
-      `Hero image: ${existingImage.title}`,
-      new Date(),
-    ])
+    
 
     res.json({ message: "Hero image deleted successfully" })
   } catch (error) {

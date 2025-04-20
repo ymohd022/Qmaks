@@ -54,8 +54,20 @@
     </div>
   </section>
   
+  <!-- Loading Indicator -->
+  <section *ngIf="isLoading" class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <mat-spinner class="mx-auto"></mat-spinner>
+          <p class="mt-3">Loading gallery projects...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
   <!-- Gallery Grid -->
-  <section class="gallery-grid">
+  <section class="gallery-grid" *ngIf="!isLoading">
     <div class="container">
       <div class="row g-4" @staggerAnimation *ngIf="filteredProjects.length > 0">
         <div class="col-lg-4 col-md-6" *ngFor="let project of filteredProjects">
@@ -80,7 +92,7 @@
                 <h3 class="project-title">{{project.name}}</h3>
                 <div class="project-meta">
                   <span class="project-type">
-                    <mat-icon>category</mat-icon> {{project.type}} - {{project.subType}}
+                    <mat-icon>category</mat-icon> {{project.type}} <span *ngIf="project.subType">- {{project.subType}}</span>
                   </span>
                   <span class="project-location">
                     <mat-icon>location_on</mat-icon> {{project.location}}
@@ -168,4 +180,3 @@
     </div>
   </div>
   <app-footer></app-footer>
-  

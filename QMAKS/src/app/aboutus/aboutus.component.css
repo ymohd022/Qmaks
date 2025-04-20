@@ -79,7 +79,7 @@ section {
 }
 
 .value-icon mat-icon {
-  font-size: 30px;
+  font-size: 26px;
   color: #002f6c; /* Royal Blue */
 }
 
@@ -176,7 +176,7 @@ section {
 }
 
 .milestone-icon mat-icon {
-  font-size: 30px;
+  font-size: 27px;
   color: #002f6c; /* Royal Blue */
 }
 
@@ -206,7 +206,7 @@ section {
 }
 
 .metric-icon mat-icon {
-  font-size: 30px;
+  font-size: 26px;
   color: #002f6c; /* Royal Blue */
 }
 

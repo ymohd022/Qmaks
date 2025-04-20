@@ -1,10 +1,11 @@
 import { Component, Inject,  OnInit } from "@angular/core"
 import {  FormBuilder,  FormGroup, Validators,  FormArray } from "@angular/forms"
 import {  MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog"
+
 @Component({
-  selector: 'app-project-form-dialog',
-  templateUrl: './project-form-dialog.component.html',
-  styleUrl: './project-form-dialog.component.css'
+  selector: "app-project-form-dialog",
+  templateUrl: "./project-form-dialog.component.html",
+  styleUrl: "./project-form-dialog.component.css",
 })
 export class ProjectFormDialogComponent implements OnInit {
   projectForm: FormGroup
@@ -35,22 +36,22 @@ export class ProjectFormDialogComponent implements OnInit {
       image: [null, data.mode === 'add' ? Validators.required : null],
       specifications: this.fb.array([]),
       features: this.fb.array([])
-    })
+    });
     
     if (data.mode === 'edit' && data.project) {
-      this.patchFormValues(data.project)
-      this.imagePreview = data.project.thumbnailImage
+      this.patchFormValues(data.project);
+      this.imagePreview = data.project.thumbnailImage;
     } else {
       // Add default specification fields
-      this.addSpecification('Construction Start', '')
-      this.addSpecification('Expected Completion', '')
-      this.addSpecification('Project Type', '')
-      this.addSpecification('Total Area', '')
+      this.addSpecification('Construction Start', '');
+      this.addSpecification('Expected Completion', '');
+      this.addSpecification('Project Type', '');
+      this.addSpecification('Total Area', '');
       
       // Add default feature fields
-      this.addFeature('')
-      this.addFeature('')
-      this.addFeature('')
+      this.addFeature('');
+      this.addFeature('');
+      this.addFeature('');
     }
   }
 
@@ -79,11 +80,11 @@ export class ProjectFormDialogComponent implements OnInit {
 
     // Clear default features and add from project
     this.featuresArray.clear()
-    if (project.features && project.features.length > 0) {
-      project.features.forEach((feature: string) => {
-        this.addFeature(feature)
-      })
-    }
+    // Ensure features is an array before iterating
+    const features = Array.isArray(project.features) ? project.features : []
+    features.forEach((feature: string) => {
+      this.addFeature(feature)
+    })
   }
 
   get specificationsArray(): FormArray {

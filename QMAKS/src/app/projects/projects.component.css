@@ -124,6 +124,11 @@
     background-color: #008080; /* Teal */
     color: #ffffff;
   }
+
+  .upcoming {
+    background-color: #ff9800; /* Teal */
+    color: #ffffff;
+  }
   
   .project-title {
     color: #002f6c; /* Royal Blue */

@@ -13,6 +13,7 @@ import { AuthGuard } from './auth.guard';
 import { HeroImagesComponent } from './dashboard/hero-images/hero-images.component';
 import { FeaturedPropertiesComponent } from './dashboard/featured-properties/featured-properties.component';
 import { ProjectsManagementComponent } from './projects-management/projects-management/projects-management.component';
+import { GalleryManagementComponent } from './gallery/gallery-management/gallery-management.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -32,6 +33,7 @@ const routes: Routes = [
       { path: "home/hero-images", component: HeroImagesComponent },
       { path: "home/featured-properties", component: FeaturedPropertiesComponent },
       { path: "projects/details", component: ProjectsManagementComponent },
+      { path: "gallery", component: GalleryManagementComponent },
       // Add other admin routes here
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
     ],

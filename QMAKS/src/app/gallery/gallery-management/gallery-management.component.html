@@ -1,0 +1,95 @@
+<div class="gallery-management-container">
+    <div class="page-header">
+      <h1>Gallery Management</h1>
+      <p>Manage project images and videos for the gallery page</p>
+    </div>
+  
+    <div class="content-container">
+      <!-- Project Selection -->
+      <mat-card class="filter-card">
+        <mat-card-content>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Select Project</mat-label>
+                <mat-select [value]="selectedProjectId" (selectionChange)="selectProject($event.value)">
+                  <mat-option *ngFor="let project of projects" [value]="project.id">
+                    {{project.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Image Type</mat-label>
+                <mat-select [value]="selectedImageType" (selectionChange)="onImageTypeChange($event)">
+                  <mat-option *ngFor="let type of imageTypes" [value]="type.value">
+                    {{type.label}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+  
+      <!-- Gallery Management -->
+      <div class="gallery-content">
+        <div class="gallery-header">
+          <h2 *ngIf="selectedProjectId">
+            Gallery for {{ getProjectName(selectedProjectId) }}
+          </h2>
+          <button mat-raised-button color="primary" (click)="openUploadDialog()" [disabled]="!selectedProjectId">
+            <mat-icon>add_photo_alternate</mat-icon>
+            Add Image/Video
+          </button>
+        </div>
+  
+        <!-- Loading Spinner -->
+        <div *ngIf="isLoading" class="loading-container">
+          <mat-spinner diameter="40"></mat-spinner>
+          <p>Loading gallery...</p>
+        </div>
+  
+        <!-- Gallery Grid -->
+        <div *ngIf="!isLoading" class="gallery-grid" cdkDropList (cdkDropListDropped)="onDrop($event)">
+          <div *ngIf="(filteredImages.length === 0)" class="no-images">
+            <mat-icon>photo_library</mat-icon>
+            <p>No images found for this project and filter.</p>
+            <button mat-raised-button color="primary" (click)="openUploadDialog()">
+              Add Image/Video
+            </button>
+          </div>
+  
+          <div *ngFor="let image of filteredImages" class="gallery-item" cdkDrag>
+            <div class="gallery-item-content">
+              <div class="image-container">
+                <img [src]="getImageUrl(image)" [alt]="image.caption">
+                <div class="image-type-badge" [ngClass]="image.type">
+                  {{getImageTypeLabel(image.type)}}
+                </div>
+                <div class="video-indicator" *ngIf="isVideo(image)">
+                  <mat-icon>play_circle_filled</mat-icon>
+                </div>
+                <div class="drag-handle" cdkDragHandle>
+                  <mat-icon>drag_indicator</mat-icon>
+                </div>
+              </div>
+              <div class="image-details">
+                <p class="image-caption">{{image.caption}}</p>
+                <div class="image-actions">
+                  <button mat-icon-button color="primary" (click)="openEditDialog(image)" matTooltip="Edit">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button mat-icon-button color="warn" (click)="openDeleteDialog(image)" matTooltip="Delete">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

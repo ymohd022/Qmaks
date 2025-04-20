@@ -209,7 +209,9 @@ router.put("/:id", uploadImage.single("image"), async (req, res) => {
       }
 
       // Get the relative path to the new uploaded file
-      imagePath = req.file.path.replace(/\\/g, "/").replace("server/", "")
+      const imagePath = path.relative(path.join(__dirname, '../'), req.file.path)
+  .replace(/\\/g, '/')
+  .replace('server/', ''); // Add this line if needed
       updateQuery += ", image_path = ?"
       queryParams.push(imagePath)
     }

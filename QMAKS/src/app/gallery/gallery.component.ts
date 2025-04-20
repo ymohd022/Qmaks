@@ -1,10 +1,29 @@
-import { Component, type OnInit } from "@angular/core"
+import { Component,  OnInit } from "@angular/core"
 import { trigger, transition, style, animate, query, stagger } from "@angular/animations"
+import  { ProjectService } from "../services/project.service"
+import  { GalleryService, GalleryImage } from "../services/gallery.service"
+import { forkJoin } from "rxjs"
+
+interface GalleryProject {
+  id: number
+  name: string
+  type: string
+  subType: string
+  status: string
+  location: string
+  year: number | string
+  description: string
+  images: {
+    url: string
+    type: string
+    caption: string
+  }[]
+}
 
 @Component({
-  selector: 'app-gallery',
-  templateUrl: './gallery.component.html',
-  styleUrl: './gallery.component.css',
+  selector: "app-gallery",
+  templateUrl: "./gallery.component.html",
+  styleUrl: "./gallery.component.css",
   animations: [
     trigger("fadeIn", [
       transition(":enter", [style({ opacity: 0 }), animate("0.5s ease-in-out", style({ opacity: 1 }))]),
@@ -24,153 +43,9 @@ import { trigger, transition, style, animate, query, stagger } from "@angular/an
   ],
 })
 export class GalleryComponent implements OnInit {
-  // All projects data
-  projects = [
-    {
-      id: 1,
-      name: "Royal Heights",
-      type: "Residential",
-      subType: "Apartment",
-      status: "Completed",
-      location: "Downtown",
-      year: 2022,
-      images: [
-        { url: "/HASEEB RESIDENCY.png", type: "image", caption: "Building Exterior" },
-        { url: "/lobby.jpg", type: "image", caption: "Lobby" },
-        { url: "/apartment-inter.jpg", type: "image", caption: "Apartment Interior" },
-        { url: "/property.jpg", type: "video", caption: "Property Tour" },
-      ],
-      description: "Luxury apartments with premium amenities in the heart of the city.",
-    },
-    {
-      id: 2,
-      name: "Green Valley Villas",
-      type: "Residential",
-      subType: "Villa",
-      status: "Completed",
-      location: "Suburban Area",
-      year: 2021,
-      images: [
-        { url: "/placeholder.svg", type: "image", caption: "Villa Exterior" },
-        { url: "/placeholder.svg", type: "image", caption: "Garden" },
-        { url: "/placeholder.svg", type: "image", caption: "Living Room" },
-        { url: "/placeholder.svg", type: "video", caption: "Property Walkthrough" },
-      ],
-      description: "Eco-friendly villas with spacious gardens and sustainable features.",
-    },
-    {
-      id: 3,
-      name: "Skyline Towers",
-      type: "Residential",
-      subType: "High-rise",
-      status: "Ongoing",
-      location: "Business District",
-      year: 2023,
-      images: [
-        { url: "/placeholder.svg", type: "image", caption: "Tower Rendering" },
-        { url: "/placeholder.svg", type: "image", caption: "Construction Progress" },
-        { url: "/placeholder.svg", type: "image", caption: "Sample Apartment" },
-        { url: "/placeholder.svg", type: "video", caption: "3D Walkthrough" },
-      ],
-      description: "Modern apartments with panoramic city views and smart home technology.",
-    },
-    {
-      id: 4,
-      name: "Riverside Residences",
-      type: "Residential",
-      subType: "Condo",
-      status: "Upcoming",
-      location: "Waterfront",
-      year: 2024,
-      images: [
-        { url: "/placeholder.svg", type: "image", caption: "Building Concept" },
-        { url: "/placeholder.svg", type: "image", caption: "Location View" },
-        { url: "/placeholder.svg", type: "image", caption: "Interior Concept" },
-        { url: "/placeholder.svg", type: "video", caption: "Project Preview" },
-      ],
-      description: "Exclusive waterfront condos with private balconies and premium finishes.",
-    },
-    {
-      id: 5,
-      name: "Central Business Plaza",
-      type: "Commercial",
-      subType: "Office",
-      status: "Completed",
-      location: "Downtown",
-      year: 2020,
-      images: [
-        { url: "/placeholder.svg", type: "image", caption: "Building Exterior" },
-        { url: "/placeholder.svg", type: "image", caption: "Lobby" },
-        { url: "/placeholder.svg", type: "image", caption: "Office Space" },
-        { url: "/placeholder.svg", type: "video", caption: "Facility Tour" },
-      ],
-      description: "Modern office complex with state-of-the-art facilities and prime location.",
-    },
-    {
-      id: 6,
-      name: "Sunset Mall",
-      type: "Commercial",
-      subType: "Retail",
-      status: "Completed",
-      location: "Suburban Area",
-      year: 2019,
-      images: [
-        { url: "/placeholder.svg", type: "image", caption: "Mall Exterior" },
-        { url: "/placeholder.svg", type: "image", caption: "Main Atrium" },
-        { url: "/placeholder.svg", type: "image", caption: "Food Court" },
-        { url: "/placeholder.svg", type: "video", caption: "Mall Tour" },
-      ],
-      description: "Shopping destination with diverse retail options and entertainment facilities.",
-    },
-    {
-      id: 7,
-      name: "Tech Innovation Hub",
-      type: "Commercial",
-      subType: "Mixed-use",
-      status: "Ongoing",
-      location: "Business District",
-      year: 2023,
-      images: [
-        { url: "/placeholder.svg", type: "image", caption: "Building Rendering" },
-        { url: "/placeholder.svg", type: "image", caption: "Construction Progress" },
-        { url: "/placeholder.svg", type: "image", caption: "Interior Concept" },
-        { url: "/placeholder.svg", type: "video", caption: "Project Overview" },
-      ],
-      description: "Mixed-use development focused on technology companies and startups.",
-    },
-    {
-      id: 8,
-      name: "Harmony Industrial Park",
-      type: "Industrial",
-      subType: "Warehouse",
-      status: "Completed",
-      location: "Industrial Zone",
-      year: 2021,
-      images: [
-        { url: "/placeholder.svg", type: "image", caption: "Aerial View" },
-        { url: "/placeholder.svg", type: "image", caption: "Warehouse Exterior" },
-        { url: "/placeholder.svg", type: "image", caption: "Interior Space" },
-        { url: "/placeholder.svg", type: "video", caption: "Facility Overview" },
-      ],
-      description: "Modern industrial complex with efficient logistics infrastructure.",
-    },
-    {
-      id: 9,
-      name: "Greenfield Manufacturing Plant",
-      type: "Industrial",
-      subType: "Factory",
-      status: "Ongoing",
-      location: "Industrial Zone",
-      year: 2023,
-      images: [
-        { url: "/placeholder.svg", type: "image", caption: "Construction Site" },
-        { url: "/placeholder.svg", type: "image", caption: "Building Progress" },
-        { url: "/placeholder.svg", type: "image", caption: "Facility Rendering" },
-        { url: "/placeholder.svg", type: "video", caption: "Project Timeline" },
-      ],
-      description: "State-of-the-art manufacturing facility with sustainable design elements.",
-    },
-  ]
+  // Projects data
+  projects: GalleryProject[] = []
+  isLoading = true
 
   // Filter options
   projectTypes = [
@@ -204,18 +79,119 @@ export class GalleryComponent implements OnInit {
   }
 
   // Filtered projects
-  filteredProjects = [...this.projects]
+  filteredProjects: GalleryProject[] = []
 
   // Selected project for lightbox
-  selectedProject: any = null
+  selectedProject: GalleryProject | null = null
   selectedImageIndex = 0
   lightboxOpen = false
 
-  constructor() {}
+  constructor(
+    private projectService: ProjectService,
+    private galleryService: GalleryService,
+  ) {}
 
   ngOnInit(): void {
-    // Initialize with all projects
-    this.applyFilters()
+    this.loadProjects()
+  }
+
+  // Load projects and their gallery images
+  loadProjects(): void {
+    this.isLoading = true
+
+    this.projectService.getProjects().subscribe({
+      next: (projects) => {
+        // Create an array of observables for each project's gallery images
+        const galleryRequests = projects.map((project) => this.galleryService.getGalleryImagesByProject(project.id))
+
+        // If there are projects, fetch their gallery images
+        if (projects.length > 0) {
+          forkJoin(galleryRequests).subscribe({
+            next: (galleryResults) => {
+              // Map projects with their gallery images
+              this.projects = projects.map((project, index) => {
+                const projectImages = galleryResults[index]
+
+                // Extract year from completion date if available
+                const year = project.completion
+                  ? new Date(project.completion).getFullYear()
+                  : project.createdAt
+                    ? new Date(project.createdAt).getFullYear()
+                    : "N/A"
+
+                // Map to gallery project format
+                return {
+                  id: project.id,
+                  name: project.name,
+                  type: project.type,
+                  subType: project.type.includes("-") ? project.type.split("-")[1].trim() : "",
+                  status: project.status,
+                  location: project.location,
+                  year: year,
+                  description: project.description,
+                  images: this.mapGalleryImages(projectImages, project),
+                }
+              })
+
+              // Filter out projects with no images
+              this.projects = this.projects.filter((project) => project.images.length > 0)
+
+              this.applyFilters()
+              this.isLoading = false
+            },
+            error: (error) => {
+              console.error("Error loading gallery images:", error)
+              this.isLoading = false
+            },
+          })
+        } else {
+          this.isLoading = false
+        }
+      },
+      error: (error) => {
+        console.error("Error loading projects:", error)
+        this.isLoading = false
+      },
+    })
+  }
+
+  // Map gallery images to the format expected by the template
+  mapGalleryImages(galleryImages: GalleryImage[], project: any): any[] {
+    // If no gallery images, try to use project media or default images
+    if (!galleryImages || galleryImages.length === 0) {
+      // Create a default image if project has thumbnailImage
+      if (project.thumbnailImage) {
+        return [
+          {
+            url: project.thumbnailImage,
+            type: "image",
+            caption: "Project Thumbnail",
+          },
+        ]
+      }
+      return []
+    }
+
+    // Map gallery images to the format expected by the template
+    return galleryImages.map((image) => ({
+      url: image.url,
+      type: image.type === "video" ? "video" : "image",
+      caption: image.caption || `${project.name} - ${this.getImageTypeLabel(image.type)}`,
+    }))
+  }
+
+  // Get label for image type
+  getImageTypeLabel(type: string): string {
+    switch (type) {
+      case "building":
+        return "Building Exterior"
+      case "interior":
+        return "Interior"
+      case "video":
+        return "Video"
+      default:
+        return type
+    }
   }
 
   // Apply filters
@@ -237,7 +213,7 @@ export class GalleryComponent implements OnInit {
   }
 
   // Open lightbox
-  openLightbox(project: any, index: number): void {
+  openLightbox(project: GalleryProject, index: number): void {
     this.selectedProject = project
     this.selectedImageIndex = index
     this.lightboxOpen = true

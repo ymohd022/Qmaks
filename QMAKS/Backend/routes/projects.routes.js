@@ -343,7 +343,10 @@ router.put("/:id", uploadImage.single("image"), async (req, res) => {
 
     // If a new image was uploaded, add it as a new photo
     if (req.file) {
-      const imagePath = req.file.path.replace(/\\/g, "/").replace("server/", "")
+      // In POST and PUT routes, modify image path generation:
+const imagePath = path.relative(path.join(__dirname, '../'), req.file.path)
+.replace(/\\/g, '/')
+.replace('server/', ''); // Add this line if needed
 
       // Get the current highest display order
       const [orderResult] = await pool.query(
@@ -485,7 +488,11 @@ router.post("/:id/media", uploadImage.single("media"), async (req, res) => {
     }
 
     // Get the relative path to the uploaded file
-    const mediaPath = req.file.path.replace(/\\/g, "/").replace("server/", "")
+    // const mediaPath = req.file.path.replace(/\\/g, "/").replace("server/", "")
+    // In POST and PUT routes, modify image path generation:
+const mediaPath = path.relative(path.join(__dirname, '../'), req.file.path)
+.replace(/\\/g, '/')
+.replace('server/', ''); // Add this line if needed
 
     // Insert media
     const [result] = await pool.query(
@@ -593,7 +600,10 @@ router.post("/:id/brochure", uploadBrochure.single("brochure"), async (req, res)
     }
 
     // Get the relative path to the uploaded brochure
-    const brochurePath = req.file.path.replace(/\\/g, "/").replace("server/", "")
+    // const brochurePath = req.file.path.replace(/\\/g, "/").replace("server/", "")
+    const brochurePath = path.relative(path.join(__dirname, '../'), req.file.path)
+  .replace(/\\/g, '/')
+  .replace('server/', ''); // Add this line if needed
 
     // Update project with brochure info
     await pool.query("UPDATE projects SET brochure_path = ?, brochure_title = ? WHERE id = ?", [

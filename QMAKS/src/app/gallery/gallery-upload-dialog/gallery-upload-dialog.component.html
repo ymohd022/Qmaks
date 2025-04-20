@@ -1,0 +1,80 @@
+<div class="dialog-container">
+    <h2 mat-dialog-title>{{formTitle}} for {{data.projectName}}</h2>
+    
+    <form [formGroup]="galleryForm" (ngSubmit)="onSubmit()">
+      <mat-dialog-content>
+        <div class="form-content">
+          <!-- Image Type Selection -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Item Type</mat-label>
+            <mat-select formControlName="type" (selectionChange)="onTypeChange($event)">
+              <mat-option *ngFor="let type of imageTypes" [value]="type.value">
+                {{type.label}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+          <!-- Caption -->
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Caption</mat-label>
+            <input matInput formControlName="caption" placeholder="Enter a caption for this image">
+            <mat-error *ngIf="galleryForm.get('caption')?.hasError('required')">
+              Caption is required
+            </mat-error>
+            <mat-error *ngIf="galleryForm.get('caption')?.hasError('maxlength')">
+              Caption cannot exceed 100 characters
+            </mat-error>
+          </mat-form-field>
+          
+          <!-- Video URL (for video type) -->
+          <ng-container *ngIf="isVideo">
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Video URL</mat-label>
+              <input matInput formControlName="videoUrl" placeholder="Enter the video URL">
+              <mat-hint>Provide a direct link to an MP4 video file</mat-hint>
+              <mat-error *ngIf="galleryForm.get('videoUrl')?.hasError('required')">
+                Video URL is required
+              </mat-error>
+            </mat-form-field>
+            
+            <div class="video-preview" *ngIf="videoUrl">
+              <h3>Video Preview</h3>
+              <video controls>
+                <source [src]="videoUrl" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </ng-container>
+          
+          <!-- Image Upload (for image types) -->
+          <ng-container *ngIf="!isVideo">
+            <div class="image-upload-container">
+              <div class="image-preview" *ngIf="imagePreview">
+                <img [src]="imagePreview" alt="Image Preview">
+              </div>
+              <div class="image-upload" *ngIf="!imagePreview">
+                <mat-icon>cloud_upload</mat-icon>
+                <p>Click to select an image</p>
+              </div>
+              <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*" style="display: none;">
+              <button type="button" mat-raised-button color="primary" (click)="fileInput.click()" class="upload-button">
+                {{imagePreview ? 'Change Image' : 'Select Image'}}
+              </button>
+              <mat-error *ngIf="galleryForm.get('file')?.invalid && galleryForm.get('file')?.touched">
+                Image file is required
+              </mat-error>
+            </div>
+          </ng-container>
+        </div>
+      </mat-dialog-content>
+      
+      <mat-dialog-actions align="end">
+        <button mat-button type="button" (click)="onCancel()" [disabled]="isLoading">Cancel</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="galleryForm.invalid || isLoading">
+          <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
+          <span *ngIf="!isLoading">{{submitButtonText}}</span>
+        </button>
+      </mat-dialog-actions>
+    </form>
+  </div>
+  

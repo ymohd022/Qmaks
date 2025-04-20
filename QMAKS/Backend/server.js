@@ -6,12 +6,9 @@ const path = require("path")
 
 // Import routes
 // const authRoutes = require("./routes/auth.routes")
-// const dashboardRoutes = require("./routes/dashboard.routes")
-// const projectRoutes = require("./routes/project.routes")
-// const galleryRoutes = require("./routes/gallery.routes")
-// const brochureRoutes = require("./routes/brochure.routes")
 const heroImageRoutes = require("./routes/hero-images.routes")
 const featuredPropertyRoutes = require("./routes/featured-properties.routes")
+const galleryRoutes = require("./routes/gallery.routes")
 const projectRoutes = require("./routes/projects.routes")
 
 // Create Express app
@@ -28,13 +25,10 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 
 // API routes
 // app.use("/api/auth", authRoutes)
-// app.use("/api/dashboard", authenticateToken, dashboardRoutes)
-// app.use("/api/projects", authenticateToken, projectRoutes)
-// app.use("/api/gallery", authenticateToken, galleryRoutes)
-// app.use("/api/brochures", authenticateToken, brochureRoutes)
 app.use("/api/home/hero-images", heroImageRoutes)
 app.use("/api/home/featured-properties", featuredPropertyRoutes)
 app.use("/api/projects", projectRoutes)
+app.use("/api/gallery",  galleryRoutes)
 
 // Serve Angular app in production
 if (process.env.NODE_ENV === "production") {

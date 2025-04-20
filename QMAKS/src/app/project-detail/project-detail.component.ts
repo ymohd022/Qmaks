@@ -45,26 +45,19 @@ export class ProjectDetailComponent implements OnInit {
     this.loading = true
     this.projectService.getProject(id).subscribe(
       (project: Project) => {
+        console.log("Loaded project details:", project)
         this.project = project
 
-        // Ensure compatibility with the template
-        if (!this.project.gallery) {
-          this.project.gallery = []
-        }
-        if (!this.project.floorPlans) {
-          this.project.floorPlans = []
-        }
-        if (!this.project.architecturalRenders) {
-          this.project.architecturalRenders = []
-        }
+        // Ensure gallery, floorPlans, and architecturalRenders are arrays
+        if (!this.project.gallery) this.project.gallery = []
+        if (!this.project.floorPlans) this.project.floorPlans = []
+        if (!this.project.architecturalRenders) this.project.architecturalRenders = []
 
-        // Map name to title for compatibility
-        if (this.project.name && !this.project.title) {
-          this.project.title = this.project.name
-        }
+        // Ensure title is set for compatibility
+        if (!this.project.title) this.project.title = this.project.name
 
-        // Map brochurePath to brochureUrl for compatibility
-        if (this.project.brochurePath && !this.project.brochureUrl) {
+        // Ensure brochureUrl is set for compatibility
+        if (!this.project.brochureUrl && this.project.brochurePath) {
           this.project.brochureUrl = this.project.brochurePath
         }
 
@@ -95,7 +88,7 @@ export class ProjectDetailComponent implements OnInit {
       const formData = {
         ...this.inquiryForm.value,
         projectId: this.project?.id,
-        projectName: this.project?.title || this.project?.name,
+        projectName: this.project?.name,
       }
 
       // Simulate API call

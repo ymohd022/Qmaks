@@ -62,6 +62,8 @@ import { BrochureUploadDialogComponent } from './dashboard/featured-properties/b
 import { ProjectsManagementComponent } from './projects-management/projects-management/projects-management.component';
 import { ProjectFormDialogComponent } from './projects-management/project-form-dialog/project-form-dialog.component';
 import { ProjectMediaDialogComponent } from './projects-management/project-media-dialog/project-media-dialog.component';
+import { GalleryUploadDialogComponent } from './gallery/gallery-upload-dialog/gallery-upload-dialog.component';
+import { GalleryManagementComponent } from './gallery/gallery-management/gallery-management.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +89,9 @@ import { ProjectMediaDialogComponent } from './projects-management/project-media
     BrochureUploadDialogComponent,
     ProjectsManagementComponent,
     ProjectFormDialogComponent,
-    ProjectMediaDialogComponent
+    ProjectMediaDialogComponent,
+    GalleryUploadDialogComponent,
+    GalleryManagementComponent
   ],
   imports: [
     BrowserModule,
