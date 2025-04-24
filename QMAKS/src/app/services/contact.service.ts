@@ -14,7 +14,7 @@ export interface ContactFormData {
   providedIn: 'root'
 })
 export class ContactService {
-  private apiUrl: string = 'http://localhost:3000/contact';
+  private apiUrl = "http://localhost:3000/api/contact";
 
   constructor(private http: HttpClient) { }
 

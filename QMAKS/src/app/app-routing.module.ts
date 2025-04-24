@@ -14,6 +14,9 @@ import { HeroImagesComponent } from './dashboard/hero-images/hero-images.compone
 import { FeaturedPropertiesComponent } from './dashboard/featured-properties/featured-properties.component';
 import { ProjectsManagementComponent } from './projects-management/projects-management/projects-management.component';
 import { GalleryManagementComponent } from './gallery/gallery-management/gallery-management.component';
+import { PrivacyPolicyComponent } from './footer/privacy-policy/privacy-policy.component';
+import { TermsOfUseComponent } from './footer/terms-of-use/terms-of-use.component';
+import { SitemapComponent } from './footer/sitemap/sitemap.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -22,8 +25,11 @@ const routes: Routes = [
   {path: 'project', component: ProjectsComponent},
   {path: 'contact', component: ContactComponent},
   { path: "gallery", component: GalleryComponent },
+  { path: "privacy-policy", component: PrivacyPolicyComponent },
+  { path: "terms-of-use", component: TermsOfUseComponent },
+  { path: "sitemap", component: SitemapComponent },
   { path: "projects/:id", component: ProjectDetailComponent },
-  { path: "login", component: LoginComponent },
+  { path: "login", component: LoginComponent, },
   {
     path: "admin",
     component: AdminLayoutComponent,

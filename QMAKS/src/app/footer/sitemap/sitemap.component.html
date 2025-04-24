@@ -1,0 +1,135 @@
+<app-navbar></app-navbar>
+<div class="sitemap-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="sitemap-header">
+          <h1>Sitemap</h1>
+          <p>Navigate through our website with ease using this comprehensive sitemap.</p>
+        </div>
+        
+        <div class="section-divider"></div>
+        
+        <div class="sitemap-content">
+          <!-- Main Navigation -->
+          <section class="sitemap-section">
+            <h2>Main Navigation</h2>
+            <div class="sitemap-links">
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <a routerLink="/" class="sitemap-link">
+                    <mat-icon>home</mat-icon>
+                    <span>Home</span>
+                  </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <a routerLink="/aboutus" class="sitemap-link">
+                    <mat-icon>business</mat-icon>
+                    <span>About Us</span>
+                  </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <a routerLink="/project" class="sitemap-link">
+                    <mat-icon>apartment</mat-icon>
+                    <span>Projects</span>
+                  </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <a routerLink="/gallery" class="sitemap-link">
+                    <mat-icon>photo_library</mat-icon>
+                    <span>Gallery</span>
+                  </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <a routerLink="/contact" class="sitemap-link">
+                    <mat-icon>contact_mail</mat-icon>
+                    <span>Contact</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+          <!-- Projects -->
+          <section class="sitemap-section">
+            <h2>Projects</h2>
+            <div class="sitemap-links">
+              <div class="row">
+                <div *ngIf="loading" class="col-12 text-center">
+                  <mat-spinner diameter="40" class="mx-auto"></mat-spinner>
+                  <p>Loading projects...</p>
+                </div>
+                
+                <div *ngIf="!loading && projects.length === 0" class="col-12 text-center">
+                  <p>No projects available.</p>
+                </div>
+                
+                <div *ngFor="let project of projects" class="col-md-3 col-sm-6">
+                  <a [routerLink]="['/projects', project.id]" class="sitemap-link">
+                    <mat-icon>location_city</mat-icon>
+                    <span>{{project.name}}</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+          <!-- About Us Pages -->
+          <section class="sitemap-section">
+            <h2>About Us</h2>
+            <div class="sitemap-links">
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <a routerLink="/aboutus" class="sitemap-link">
+                    <mat-icon>info</mat-icon>
+                    <span>Company Overview</span>
+                  </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <a routerLink="/aboutus" class="sitemap-link">
+                    <mat-icon>people</mat-icon>
+                    <span>Our Team</span>
+                  </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <a routerLink="/aboutus" class="sitemap-link">
+                    <mat-icon>history</mat-icon>
+                    <span>Our History</span>
+                  </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <a routerLink="/aboutus" class="sitemap-link">
+                    <mat-icon>format_quote</mat-icon>
+                    <span>Testimonials</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+          <!-- Legal Pages -->
+          <section class="sitemap-section">
+            <h2>Legal Information</h2>
+            <div class="sitemap-links">
+              <div class="row">
+                <div class="col-md-3 col-sm-6">
+                  <a routerLink="/privacy-policy" class="sitemap-link">
+                    <mat-icon>security</mat-icon>
+                    <span>Privacy Policy</span>
+                  </a>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <a routerLink="/terms-of-use" class="sitemap-link">
+                    <mat-icon>gavel</mat-icon>
+                    <span>Terms of Use</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { DashboardService } from '../services/dashboard.service';
-import { ChartOptions } from 'chart.js';
+import { Component,  OnInit } from "@angular/core"
+import  { DashboardService } from "../services/dashboard.service"
+import  { ChartConfiguration } from "chart.js"
 
 @Component({
   selector: "app-dashboard",
@@ -8,13 +8,13 @@ import { ChartOptions } from 'chart.js';
   styleUrl: "./dashboard.component.css",
 })
 export class DashboardComponent implements OnInit {
-  isLoading = true;
-  
+  isLoading = true
+
   // Chart options
-  chartOptions: ChartOptions = {
+  chartOptions: ChartConfiguration["options"] = {
     responsive: true,
-    maintainAspectRatio: false
-  };
+    maintainAspectRatio: false,
+  }
 
   // Dashboard stats
   stats = {
@@ -26,13 +26,53 @@ export class DashboardComponent implements OnInit {
     totalBrochures: 0,
   }
 
-  // Recent activities
-  recentActivities: any[] = []
-
   // Charts data
-  projectsByStatusData: any
-  projectsByTypeData: any
-  uploadsByMonthData: any
+  projectsByStatusData: any = {
+    labels: ["Completed", "Ongoing", "Upcoming"],
+    datasets: [
+      {
+        data: [0, 0, 0],
+        backgroundColor: ["#4caf50", "#2196f3", "#ff9800"],
+      },
+    ],
+  }
+
+  projectsByTypeData: any = {
+    labels: ["Residential", "Commercial", "Industrial", "Mixed-use"],
+    datasets: [
+      {
+        data: [0, 0, 0, 0],
+        backgroundColor: ["#002f6c", "#d4af37", "#4caf50", "#9c27b0"],
+      },
+    ],
+  }
+
+  uploadsByMonthData: any = {
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    datasets: [
+      {
+        label: "Images",
+        data: [0, 0, 0, 0, 0, 0],
+        borderColor: "#2196f3",
+        backgroundColor: "rgba(33, 150, 243, 0.2)",
+        tension: 0.4,
+      },
+      {
+        label: "Videos",
+        data: [0, 0, 0, 0, 0, 0],
+        borderColor: "#ff9800",
+        backgroundColor: "rgba(255, 152, 0, 0.2)",
+        tension: 0.4,
+      },
+      {
+        label: "Brochures",
+        data: [0, 0, 0, 0, 0, 0],
+        borderColor: "#4caf50",
+        backgroundColor: "rgba(76, 175, 80, 0.2)",
+        tension: 0.4,
+      },
+    ],
+  }
 
   constructor(private dashboardService: DashboardService) {}
 
@@ -46,10 +86,11 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getDashboardStats().subscribe({
       next: (data) => {
         this.stats = data.stats
-        this.recentActivities = data.recentActivities
 
-        // Setup chart data
-        this.setupCharts(data)
+        // Setup chart data if available
+        if (data.projectsByType && data.projectsByType.length > 0) {
+          this.setupCharts(data)
+        }
 
         this.isLoading = false
       },
@@ -76,42 +117,46 @@ export class DashboardComponent implements OnInit {
     }
 
     // Projects by type chart
-    this.projectsByTypeData = {
-      labels: data.projectsByType.map((item: any) => item.type),
-      datasets: [
-        {
-          data: data.projectsByType.map((item: any) => item.count),
-          backgroundColor: ["#002f6c", "#d4af37", "#4caf50", "#9c27b0"],
-        },
-      ],
+    if (data.projectsByType && data.projectsByType.length > 0) {
+      this.projectsByTypeData = {
+        labels: data.projectsByType.map((item: any) => item.type),
+        datasets: [
+          {
+            data: data.projectsByType.map((item: any) => item.count),
+            backgroundColor: ["#002f6c", "#d4af37", "#4caf50", "#9c27b0"],
+          },
+        ],
+      }
     }
 
     // Uploads by month chart
-    this.uploadsByMonthData = {
-      labels: data.uploadsByMonth.map((item: any) => item.month),
-      datasets: [
-        {
-          label: "Images",
-          data: data.uploadsByMonth.map((item: any) => item.images),
-          borderColor: "#2196f3",
-          backgroundColor: "rgba(33, 150, 243, 0.2)",
-          tension: 0.4,
-        },
-        {
-          label: "Videos",
-          data: data.uploadsByMonth.map((item: any) => item.videos),
-          borderColor: "#ff9800",
-          backgroundColor: "rgba(255, 152, 0, 0.2)",
-          tension: 0.4,
-        },
-        {
-          label: "Brochures",
-          data: data.uploadsByMonth.map((item: any) => item.brochures),
-          borderColor: "#4caf50",
-          backgroundColor: "rgba(76, 175, 80, 0.2)",
-          tension: 0.4,
-        },
-      ],
+    if (data.uploadsByMonth && data.uploadsByMonth.length > 0) {
+      this.uploadsByMonthData = {
+        labels: data.uploadsByMonth.map((item: any) => item.month),
+        datasets: [
+          {
+            label: "Images",
+            data: data.uploadsByMonth.map((item: any) => item.images),
+            borderColor: "#2196f3",
+            backgroundColor: "rgba(33, 150, 243, 0.2)",
+            tension: 0.4,
+          },
+          {
+            label: "Videos",
+            data: data.uploadsByMonth.map((item: any) => item.videos),
+            borderColor: "#ff9800",
+            backgroundColor: "rgba(255, 152, 0, 0.2)",
+            tension: 0.4,
+          },
+          {
+            label: "Brochures",
+            data: data.uploadsByMonth.map((item: any) => item.brochures),
+            borderColor: "#4caf50",
+            backgroundColor: "rgba(76, 175, 80, 0.2)",
+            tension: 0.4,
+          },
+        ],
+      }
     }
   }
 
@@ -125,14 +170,6 @@ export class DashboardComponent implements OnInit {
       totalGalleryItems: 86,
       totalBrochures: 9,
     }
-
-    // Sample recent activities
-    this.recentActivities = [
-      { type: "upload", user: "Admin", item: "New hero image", timestamp: new Date(Date.now() - 3600000) },
-      { type: "edit", user: "Admin", item: "Royal Heights project", timestamp: new Date(Date.now() - 86400000) },
-      { type: "delete", user: "Admin", item: "Outdated brochure", timestamp: new Date(Date.now() - 172800000) },
-      { type: "upload", user: "Admin", item: "New gallery images", timestamp: new Date(Date.now() - 259200000) },
-    ]
 
     // Sample chart data
     this.projectsByStatusData = {

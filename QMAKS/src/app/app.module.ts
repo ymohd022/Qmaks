@@ -64,6 +64,9 @@ import { ProjectFormDialogComponent } from './projects-management/project-form-d
 import { ProjectMediaDialogComponent } from './projects-management/project-media-dialog/project-media-dialog.component';
 import { GalleryUploadDialogComponent } from './gallery/gallery-upload-dialog/gallery-upload-dialog.component';
 import { GalleryManagementComponent } from './gallery/gallery-management/gallery-management.component';
+import { PrivacyPolicyComponent } from './footer/privacy-policy/privacy-policy.component';
+import { TermsOfUseComponent } from './footer/terms-of-use/terms-of-use.component';
+import { SitemapComponent } from './footer/sitemap/sitemap.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +94,10 @@ import { GalleryManagementComponent } from './gallery/gallery-management/gallery
     ProjectFormDialogComponent,
     ProjectMediaDialogComponent,
     GalleryUploadDialogComponent,
-    GalleryManagementComponent
+    GalleryManagementComponent,
+    PrivacyPolicyComponent,
+    TermsOfUseComponent,
+    SitemapComponent
   ],
   imports: [
     BrowserModule,

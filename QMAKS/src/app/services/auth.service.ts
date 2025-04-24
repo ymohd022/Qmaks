@@ -7,7 +7,7 @@ import { catchError, tap } from "rxjs/operators"
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl: string = 'http://localhost:3000/auth';
+  private apiUrl: string = 'http://localhost:3000/api/auth';
   private tokenKey = "qmaks_auth_token"
   private userKey = "qmaks_user"
 

@@ -3,6 +3,7 @@ import  { ActivatedRoute } from "@angular/router"
 import {  FormBuilder,  FormGroup, Validators } from "@angular/forms"
 import  { MatSnackBar } from "@angular/material/snack-bar"
 import  { ProjectService, Project } from "../services/project.service"
+import  { HttpClient } from "@angular/common/http"
 
 @Component({
   selector: "app-project-detail",
@@ -15,12 +16,14 @@ export class ProjectDetailComponent implements OnInit {
   inquiryForm: FormGroup
   activeGalleryTab = "photos"
   submitting = false
+  private apiUrl = "http://localhost:3000/api/contact"
 
   constructor(
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
+    private http: HttpClient,
   ) {
     this.inquiryForm = this.fb.group({
       name: ["", [Validators.required]],
@@ -29,6 +32,7 @@ export class ProjectDetailComponent implements OnInit {
       message: ["", [Validators.required]],
       visitDate: [""],
       preferredTime: [""],
+      scheduleVisit: [false],
     })
   }
 
@@ -81,26 +85,35 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   submitInquiry(): void {
-    if (this.inquiryForm.valid) {
+    if (this.inquiryForm.valid && this.project) {
       this.submitting = true
 
-      // In a real application, you would send this data to your backend
+      // Prepare form data with project information
       const formData = {
         ...this.inquiryForm.value,
-        projectId: this.project?.id,
-        projectName: this.project?.name,
+        projectId: this.project.id,
+        projectName: this.project.name,
       }
 
-      // Simulate API call
-      setTimeout(() => {
-        console.log("Form submitted:", formData)
-        this.snackBar.open("Your inquiry has been submitted successfully!", "Close", {
-          duration: 5000,
-          panelClass: ["success-snackbar"],
-        })
-        this.inquiryForm.reset()
-        this.submitting = false
-      }, 1500)
+      // Send to backend
+      this.http.post(`${this.apiUrl}/project-inquiry`, formData).subscribe({
+        next: (response) => {
+          this.snackBar.open("Your inquiry has been submitted successfully!", "Close", {
+            duration: 5000,
+            panelClass: ["success-snackbar"],
+          })
+          this.inquiryForm.reset()
+          this.submitting = false
+        },
+        error: (error) => {
+          console.error("Error submitting inquiry:", error)
+          this.snackBar.open("Failed to submit inquiry. Please try again later.", "Close", {
+            duration: 5000,
+            panelClass: ["error-snackbar"],
+          })
+          this.submitting = false
+        },
+      })
     } else {
       // Mark all fields as touched to trigger validation messages
       Object.keys(this.inquiryForm.controls).forEach((key) => {

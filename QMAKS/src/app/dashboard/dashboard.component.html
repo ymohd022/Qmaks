@@ -145,42 +145,7 @@
             </canvas>
           </mat-card-content>
         </mat-card>
-      </div>
-      
-      <!-- Recent Activities -->
-      <div class="col-lg-4 mb-4">
-        <mat-card class="activities-card">
-          <mat-card-header>
-            <mat-card-title>Recent Activities</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <div class="activities-list">
-              <div class="activity-item" *ngFor="let activity of recentActivities">
-                <div class="activity-icon" [ngClass]="activity.type">
-                  <mat-icon *ngIf="activity.type === 'upload'">cloud_upload</mat-icon>
-                  <mat-icon *ngIf="activity.type === 'edit'">edit</mat-icon>
-                  <mat-icon *ngIf="activity.type === 'delete'">delete</mat-icon>
-                </div>
-                <div class="activity-details">
-                  <p class="activity-text">
-                    <span class="activity-user">{{activity.user}}</span> 
-                    <span *ngIf="activity.type === 'upload'">uploaded</span>
-                    <span *ngIf="activity.type === 'edit'">edited</span>
-                    <span *ngIf="activity.type === 'delete'">deleted</span>
-                    <span class="activity-item-name">{{activity.item}}</span>
-                  </p>
-                  <p class="activity-time">{{activity.timestamp | date:'medium'}}</p>
-                </div>
-              </div>
-              
-              <div class="no-activities" *ngIf="recentActivities.length === 0">
-                <mat-icon>info</mat-icon>
-                <p>No recent activities</p>
-              </div>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </div>
+      </div>  
     </div>
     
     <!-- Quick Actions -->
@@ -204,10 +169,10 @@
                 <mat-icon>image</mat-icon>
                 Update Hero Images
               </button>
-              <button mat-raised-button color="primary" routerLink="/admin/brochures">
+              <!-- <button mat-raised-button color="primary" routerLink="/admin/brochures">
                 <mat-icon>upload_file</mat-icon>
                 Upload Brochure
-              </button>
+              </button> -->
             </div>
           </mat-card-content>
         </mat-card>

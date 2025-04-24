@@ -30,9 +30,9 @@
                [ngClass]="{'active-link': isRouteActive('/project')}"
                [routerLink]="['/project']"
                class="nav-link with-dropdown">
-              Projects <i class="bi" [ngClass]="isProjectsMenuOpen ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+              Projects
             </a>
-            <div class="mega-menu" [@expandCollapse]="isProjectsMenuOpen ? 'expanded' : 'collapsed'" *ngIf="isProjectsMenuOpen">
+            <!-- <div class="mega-menu" [@expandCollapse]="isProjectsMenuOpen ? 'expanded' : 'collapsed'" *ngIf="isProjectsMenuOpen">
               <div class="mega-menu-container">
                 <div class="mega-menu-column">
                   <h3>On-Going Projects</h3>
@@ -57,7 +57,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </li>
           <li>
             <a [routerLink]="['/gallery']" 
